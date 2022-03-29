@@ -1,0 +1,130 @@
+﻿@model SwissMoteWebsite.Models.Project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.TeamCreatedByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Team.TeamCreatedByUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedByUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invited_Email_UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invited_Email_UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invited_UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invited_UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvitationSentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvitationSentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvitationAcceptedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvitationAcceptedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invitedrole)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invitedrole)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invitationstatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invitationstatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UniqueId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UniqueId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsOn)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

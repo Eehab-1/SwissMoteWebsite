@@ -1,0 +1,122 @@
+﻿@model IEnumerable<SwissMoteWebsite.Models.Project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Team.TeamCreatedByUserId)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Team.TeamName)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedByUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedByUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invited_Email_UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Invited_UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvitationSentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvitationAcceptedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.invitedrole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.invitationstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UniqueId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsOn)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Team.TeamCreatedByUserId)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Team.TeamName)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.ProjectName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Note)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedByUserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedByUserId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreationDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Invited_Email_UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Invited_UserId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InvitationSentDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InvitationAcceptedDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.invitedrole)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.invitationstatus)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UniqueId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsOn)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>
