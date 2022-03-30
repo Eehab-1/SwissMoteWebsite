@@ -1,0 +1,18 @@
+﻿
+@using SwissMoteWebsite.Online
+
+
+@{
+    ViewBag.Title = "Online";
+}
+
+<h2>Online</h2>
+
+@{ 
+    var dic =  SecurityHelper.GetLoggedInUsers();
+
+    foreach (var item in dic)
+    {
+        <p>@item.Key</p>
+    }
+}

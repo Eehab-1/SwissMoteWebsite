@@ -9,7 +9,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+//using Microsoft.Owin.Security.Infrastructure;
 using SwissMoteWebsite.Models;
+using SwissMoteWebsite.Online;
+using WebMatrix.WebData;
 
 namespace SwissMoteWebsite.Controllers
 {
@@ -403,6 +406,7 @@ namespace SwissMoteWebsite.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            SecurityHelper.GetLoggedInUsers().Remove(WebSecurity.CurrentUserName);
             return RedirectToAction("Index", "Home");
         }
 

@@ -15,7 +15,10 @@ namespace SwissMoteWebsite.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
 
-    
+       public ActionResult Online()
+        {
+            return View();
+        }
 
 
 
