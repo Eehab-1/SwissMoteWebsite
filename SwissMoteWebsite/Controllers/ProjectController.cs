@@ -11,6 +11,8 @@ using SwissMoteWebsite.Models;
 
 namespace SwissMoteWebsite.Controllers
 {
+
+    [Authorize]
     public class ProjectController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -59,9 +61,15 @@ namespace SwissMoteWebsite.Controllers
         {
             string userid = User.Identity.GetUserId();
 
+            string username = User.Identity.GetUserName();
+
             if (ModelState.IsValid)
             {
-               
+
+                project.CreatedByUserId = userid;
+                project.CreatedByUserName = username;
+                project.CreationDate = DateTime.Now;
+                project.IsOn = true;
 
                 db.Projects.Add(project);
                 db.SaveChanges();

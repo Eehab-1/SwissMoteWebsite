@@ -6,10 +6,15 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SwissMoteWebsite.Models;
 
 namespace SwissMoteWebsite.Controllers
 {
+
+    [Authorize]
+
+
     public class TeamController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -58,6 +63,14 @@ namespace SwissMoteWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                string userid = User.Identity.GetUserId();
+                string username = User.Identity.GetUserName();
+
+                team.TeamCreatedByUserId = userid;
+                team.ClientName = username;
+
+
                 db.Teams.Add(team);
                 db.SaveChanges();
                 return RedirectToAction("Index");
