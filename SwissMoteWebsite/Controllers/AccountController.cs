@@ -165,7 +165,19 @@ namespace SwissMoteWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var timenow = DateTime.UtcNow.ToString();
+                var chatkey = timenow + Guid.NewGuid().ToString();
+
+                var chatkeynew = chatkey.Replace(" ", "").Replace(":", "-").Replace("/", "-");
+
+
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, ChatKey = chatkeynew };
+
+
+
+               
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

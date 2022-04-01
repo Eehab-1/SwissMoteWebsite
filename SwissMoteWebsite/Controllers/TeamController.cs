@@ -33,6 +33,95 @@ namespace SwissMoteWebsite.Controllers
             return View(db.Teams.ToList());
         }
 
+
+        public ActionResult InviteMore(int id)
+        {
+
+            string userid = User.Identity.GetUserId();
+
+            string username = User.Identity.GetUserName();
+
+            string TeamCreatedByUserId = db.Teams.Where(a => a.TeamId == id)
+                .Select(a => a.TeamCreatedByUserId).FirstOrDefault();
+
+            string theuniqueid = db.Teams.Where(a => a.TeamId == id)
+                .Select(a => a.TeamUniqueId).FirstOrDefault();
+
+            string TeamName = db.Teams.Where(a => a.TeamId == id)
+                .Select(a => a.TeamName).FirstOrDefault();
+
+            if (userid == TeamCreatedByUserId)
+            {
+
+
+                Team team = new Team
+                {
+                    TeamId = id ,
+                    TeamName = TeamName ,
+                    TeamCreatedByUserId=TeamCreatedByUserId,
+                    TeamInsights=0,
+                    MemberInsights=0,
+                    TeamMember="",
+                    MemberHourlyRate=0,
+                    MemberChatKey="",
+                    TeamStatus=false ,
+                    MemberStatus=false,
+                    ClientName=username,
+                    TeamUniqueId=theuniqueid
+                };
+
+
+                return View(team);
+            }
+
+            else
+            {
+
+                return View();
+            }
+
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+
+        public ActionResult InviteMore(Team team)
+        {
+
+
+            if (ModelState.IsValid)
+
+            {
+
+
+
+
+                db.Teams.Add(team);
+                db.SaveChanges();
+                ViewBag.Message = team.TeamMember + " invited Successfully.";
+               
+                return View(team);
+
+
+            }
+
+
+            return View(team);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
         // GET: Team/Details/5
         public ActionResult Details(int? id)
         {
@@ -63,13 +152,14 @@ namespace SwissMoteWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
+                var theuniqueid = Guid.NewGuid().ToString();
 
                 string userid = User.Identity.GetUserId();
                 string username = User.Identity.GetUserName();
 
                 team.TeamCreatedByUserId = userid;
                 team.ClientName = username;
-
+                team.TeamUniqueId = theuniqueid;
 
                 db.Teams.Add(team);
                 db.SaveChanges();

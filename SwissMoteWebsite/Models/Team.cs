@@ -13,6 +13,7 @@ namespace SwissMoteWebsite.Models
         [Key]
         public int TeamId { get; set; }
 
+        public string TeamUniqueId { get; set; }
         public string TeamCreatedByUserId { get; set; }
         public string TeamName { get; set; }
 

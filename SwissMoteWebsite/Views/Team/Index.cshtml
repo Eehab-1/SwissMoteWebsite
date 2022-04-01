@@ -14,6 +14,12 @@
         <th>
             @Html.DisplayNameFor(model => model.TeamCreatedByUserId)
         </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TeamUniqueId)
+        </th>
+
+
         <th>
             @Html.DisplayNameFor(model => model.TeamName)
         </th>
@@ -45,43 +51,48 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamCreatedByUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamMember)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamInsights)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberInsights)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberHourlyRate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberChatKey)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeamId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeamId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeamId })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TeamCreatedByUserId)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.TeamUniqueId)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.TeamName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TeamMember)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TeamInsights)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MemberInsights)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MemberHourlyRate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TeamStatus)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MemberStatus)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ClientName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MemberChatKey)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.TeamId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+    </td>
+</tr>
 }
 
 </table>
