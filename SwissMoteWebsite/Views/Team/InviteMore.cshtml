@@ -4,7 +4,10 @@
 
 
 @{
-ViewBag.Title = "Invite Member";
+    ViewBag.Title = "Invite Member";
+
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+
 }
 
 
@@ -26,7 +29,7 @@ ViewBag.Title = "Invite Member";
 <br />
 
 <div>
-@Html.ActionLink("Back to Projects", "Index")
+@Html.ActionLink("Back to Team", "Index")
 </div>
 
 </div>
@@ -38,70 +41,139 @@ ViewBag.Title = "Invite Member";
 <br />
 
 <div style="width:700px; padding:5px; background-color:white;">
-@using (Html.BeginForm("InviteMore", "Team", FormMethod.Post))
-{
-@Html.AntiForgeryToken()
-@Html.ValidationSummary(true) 
-
-
-  
+    @using (Html.BeginForm("InviteMore", "Team", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
 
 
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div> }
+
+        if (ViewBag.Invited != null)
+        {
+            <div style="border:solid 1px red">
+                @ViewBag.Invited
+            </div> }
+
+        if (ViewBag.NotFound != null)
+        {
+            <div style="border:solid 1px red">
+                @ViewBag.NotFound
+            </div> }
+
+        if (ViewBag.SameLogged != null)
+        {
+
+            <div style="border:solid 1px red">
+                @ViewBag.SameLogged
+            </div> }
 
 
-
-<table id="dataTable" border="0" cellpadding="0" cellspacing="0">
-
-
-@*<tr>
-<th>Project Name</th>
-<th>Note (Optional)</th>
-
-</tr>*@
-
-
-
-
-<tbody>
-    <tr style="border:1px solid black" id="trid">
-        <td id="proid">@Html.TextBoxFor(a => a.TeamName, new { @class = "form-control", @readonly = "true" })</td>
-        <td id="noteid">@Html.HiddenFor(a => a.ClientName, new { @class = "form-control", @readonly = "true" })</td>
-
-        <td id="emailid">@Html.TextBoxFor(a => a.TeamMember, new { placeholder = "Invited Username Here", @class = "form-input" })</td>
-
-        <td id="emailid">@Html.TextBoxFor(a => a.MemberHourlyRate, new { placeholder = "Hourly Rate", @class = "form-input" })</td>
-
-
-        <td id="noteid">@Html.HiddenFor(a => a.TeamUniqueId, new { @class = "form-control", @readonly = "true" })</td>
-
-        <td id="noteid">@Html.HiddenFor(a => a.TeamCreatedByUserId, new { @class = "form-control", @readonly = "true" })</td>
-
-        <td id="noteid">@Html.HiddenFor(a => a.MemberStatus, new { @class = "form-control", @readonly = "true" })</td>
-
-        <td id="noteid">@Html.HiddenFor(a => a.MemberInsights, new { @class = "form-control", @readonly = "true" })</td>
-
-        <td id="noteid">@Html.HiddenFor(a => a.TeamStatus, new { @class = "form-control", @readonly = "true" })</td>
-
-        <td id="noteid">@Html.HiddenFor(a => a.TeamInsights, new { @class = "form-control", @readonly = "true" })</td>
-
-
-
-    </tr>
-</tbody>
+        <br />
+        <br />
 
 
 
 
 
-</table> @*<input type="submit" value="Invite" />*@
-<br />
 
-<div class="form-group">
-<div class="col-md-offset-2 col-md-10">
-    <input type="submit" value="Invite More" class="btn btn-success" style="width:200px" />
-</div>
-</div>            }
+        <table id="dataTable" border="0" cellpadding="0" cellspacing="0">
+
+
+            @*<tr>
+                <th>Project Name</th>
+                <th>Note (Optional)</th>
+
+                </tr>*@
+
+            @*@{
+
+
+                if (ViewBag.Message != null)
+                {
+                            <div style="border:solid 1px green">
+                                @ViewBag.Message
+                            </div> }
+
+                if (ViewBag.Invited != null)
+                {
+                            <div style="border:solid 1px red">
+                                @ViewBag.Invited
+                            </div> }
+
+                if (ViewBag.NotFound != null)
+                {
+                            <div style="border:solid 1px red">
+                                @ViewBag.NotFound
+                            </div> }
+
+                if (ViewBag.SameLogged != null)
+                {
+
+                            <div style="border:solid 1px red">
+                                @ViewBag.SameLogged
+                            </div> }
+
+
+                            <br />
+                            <br />
+
+                }*@
+
+            <tbody>
+                <tr style="border:1px solid black" id="trid">
+                    <td id="proid">@Html.TextBoxFor(a => a.TeamName, new { @class = "form-control", @readonly = "true" })</td>
+                    <td id="noteid">@Html.HiddenFor(a => a.ClientName, new { @class = "form-control", @readonly = "true" })</td>
+
+                    <td id="emailid">@Html.TextBoxFor(a => a.TeamMember, new { placeholder = "Invited Username Here", @class = "form-input" })</td>
+
+                    <td id="emailid">@Html.TextBoxFor(a => a.MemberHourlyRate, new { placeholder = "Hourly Rate", @class = "form-input" })</td>
+
+
+                    <td id="noteid">@Html.HiddenFor(a => a.TeamUniqueId, new { @class = "form-control", @readonly = "true" })</td>
+
+                    <td id="noteid">@Html.HiddenFor(a => a.TeamCreatedByUserId, new { @class = "form-control", @readonly = "true" })</td>
+
+                    <td id="noteid">@Html.HiddenFor(a => a.MemberStatus, new { @class = "form-control", @readonly = "true" })</td>
+
+                    <td id="noteid">@Html.HiddenFor(a => a.MemberInsights, new { @class = "form-control", @readonly = "true" })</td>
+
+                    <td id="noteid">@Html.HiddenFor(a => a.TeamStatus, new { @class = "form-control", @readonly = "true" })</td>
+
+                    <td id="noteid">@Html.HiddenFor(a => a.TeamInsights, new { @class = "form-control", @readonly = "true" })</td>
+
+
+
+                </tr>
+
+
+
+
+
+
+            </tbody>
+            @*<input type="submit" value="Invite More" class="btn btn-success" style="width:200px;height:30px" />*@
+
+            @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Invite More" class="btn btn-success" style="width:200px;height:200px" />
+                    </div>
+                </div>*@
+
+
+        </table> @*<input type="submit" value="Invite" />*@
+        <br />
+        <input type="submit" value="Invite More" class="btn btn-success" style="width:200px;height:30px" />
+        @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Invite More" class="btn btn-success" style="width:200px" />
+                </div>
+            </div>*@}
 </div>
 
 

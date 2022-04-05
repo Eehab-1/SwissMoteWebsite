@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Index";
+
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
 }
 
 <h2>Index</h2>
@@ -11,13 +13,13 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.TeamCreatedByUserId)
-        </th>
+        </th>*@
 
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.TeamUniqueId)
-        </th>
+        </th>*@
 
 
         <th>
@@ -52,13 +54,13 @@
 
 @foreach (var item in Model) {
 <tr>
-    <td>
+    @*<td>
         @Html.DisplayFor(modelItem => item.TeamCreatedByUserId)
-    </td>
+    </td>*@
 
-    <td>
+    @*<td>
         @Html.DisplayFor(modelItem => item.TeamUniqueId)
-    </td>
+    </td>*@
 
     <td>
         @Html.DisplayFor(modelItem => item.TeamName)

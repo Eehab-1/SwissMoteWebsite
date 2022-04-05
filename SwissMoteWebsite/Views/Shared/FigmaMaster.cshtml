@@ -1,0 +1,246 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+
+
+@{ Layout = null; }
+
+
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <!-- Meta setup -->
+    @*<meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="">
+        <meta name="decription" content="">*@
+
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@ViewBag.Title - SwissMote</title>
+    @*@Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/fontawesome")
+        @Scripts.Render("~/bundles/modernizr")*@
+
+
+    <!-- Title -->
+    <title>Welcome</title>
+
+    <!-- Fav Icon -->
+    <link rel="icon" href="~/updatev2/images/favicon.ico" />
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="~/updatev2/css/bootstrap.css" />
+
+    <!-- Main StyleSheet -->
+    <link rel="stylesheet" href="~/updatev2/style.css" />
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="~/updatev2/css/responsive.css" />
+
+</head>
+<body>
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    <!-- main-wrapper start -->
+    <main class="main-wrapper">
+        <div class="row no-gutters">
+
+            <div class="col-lg-2 main-left-col d-none d-lg-block">
+                <div class="main-left-part">
+                    <div class="logo">
+                        <a href="#">
+                            <img src="~/updatev2/images/logo.svg" alt="">
+                        </a>
+                    </div>
+                    <ul>
+                        @*<li>
+                                <a href="#">
+                                    <img src="~/updatev2/images/icon-1.svg" alt="">
+                                    Timer
+                                </a>
+                            </li>*@
+                        <li>
+                            <a href="/Project">
+                                <img src="~/updatev2/images/icon-2.svg" alt="">
+                                Projects
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Team">
+                                <img src="~/updatev2/images/icon-3.svg" alt="">
+                                Teams
+                            </a>
+                        </li>
+                        @*<li>
+                                <a href="#">
+                                    <img src="~/updatev2/images/icon-4.svg" alt="">
+                                    Tasks
+                                </a>
+                            </li>*@
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-5.svg" alt="">
+                                Insights
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-6.svg" alt="">
+                                invoices
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" @*id="active"*@>
+                                <img src="~/updatev2/images/icon-7.svg" alt="">
+                                Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-8.svg" alt="">
+                                Help
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-8 main-right-col">
+                <div class="main-right-part">
+                    <div class="header-part">
+                        <div class="hamburger-button d-lg-none">
+                            <button class="hamburger hamburger--squeeze" type="button" data-offcanvas-open="my-navigation">
+                                @*<span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>*@
+                            </button>
+                        </div>
+
+                        <div class="header-cnt">
+                            @RenderBody()
+                        </div>
+
+
+                        @*<div class="container-fluid">
+                                @RenderBody()
+                            </div>*@
+
+                    </div>
+
+                    <div class="main-content-part">
+
+                    </div>
+
+                </div>
+            </div>
+            @*</div>*@
+
+
+
+
+
+    </main>
+    <!-- main-wrapper end -->
+    <!-- side-bar start -->
+    @*<div id="my-navigation" class="offcanvas d-lg-none">
+            <div class="mobile-menu-wrap">
+                <div class="main-left-part">
+                    <div class="logo">
+                        <a href="#">
+                            <img src="~/updatev2/images/logo.svg" alt="">
+                        </a>
+                        <i class="close-icon" data-offcanvas-close="my-navigation"></i>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-1.svg" alt="">
+                                Timer
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-2.svg" alt="">
+                                Projects
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-3.svg" alt="">
+                                Teams
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-4.svg" alt="">
+                                Tasks
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-5.svg" alt="">
+                                Insights
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-6.svg" alt="">
+                                invoices
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="active">
+                                <img src="~/updatev2/images/icon-7.svg" alt="">
+                                Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-8.svg" alt="">
+                                Help
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+    <!-- side-bar end -->
+    <!-- Main jQuery -->
+    <script src="~/updatev2/js/jquery-3.4.1.min.js"></script>
+
+    <!-- Bootstrap Propper jQuery -->
+    <script src="~/updatev2/js/popper.js"></script>
+
+    <!-- Bootstrap jQuery -->
+    <script src="~/updatev2/js/bootstrap.js"></script>
+
+    <!-- Fontawesome Script -->
+    <script src="https://kit.fontawesome.com/7749c9f08a.js"></script>
+
+    <!-- iptools-offcanvas jQuery -->
+    <script src="~/updatev2/js/iptools-offcanvas.js"></script>
+
+    <!-- Custom jQuery -->
+    <script src="~/updatev2/js/scripts.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("JavaScript", required: false)
+
+</body>
+</html>

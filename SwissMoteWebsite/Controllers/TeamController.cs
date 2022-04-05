@@ -30,7 +30,10 @@ namespace SwissMoteWebsite.Controllers
         // GET: Team
         public ActionResult Index()
         {
-            return View(db.Teams.ToList());
+
+            string userid = User.Identity.GetUserId();
+
+            return View(db.Teams.Where(a=>a.TeamCreatedByUserId==userid).ToList());
         }
 
 
@@ -91,24 +94,67 @@ namespace SwissMoteWebsite.Controllers
         {
 
 
+            var current_userid = User.Identity.GetUserId();
+            var senttoUserId = db.Users.Where(u => u.Email == team.TeamMember)
+                     .Select(i => i.Id).FirstOrDefault();
+
+            bool IsInvited = db.Teams.Where(p => p.TeamMember == team.TeamMember)
+                .Where(p => p.TeamUniqueId == team.TeamUniqueId).Any();
+
+
+
+
             if (ModelState.IsValid)
 
             {
 
+                if (!string.IsNullOrWhiteSpace(senttoUserId))
+                {
+
+                    if (senttoUserId == current_userid)
+                    {
+                        ViewBag.SameLogged = " You can't invite Yourself !";
+                    }
+
+                    else if (!IsInvited)
+                    {
+
+                        string chatkey = db.Users.Where(a => a.Email == team.TeamMember)
+                            .Select(a => a.ChatKey).FirstOrDefault();
+
+                        team.MemberChatKey = chatkey;
+                        db.Teams.Add(team);
+                        db.SaveChanges();
+                        ViewBag.Message = team.TeamMember + " invited Successfully.";
+
+                        return View();
+
+                    }
+
+                    else
+                    {
+                        ViewBag.Invited = team.TeamMember + " Already Invited to this project!";
+                    }
 
 
 
-                db.Teams.Add(team);
-                db.SaveChanges();
-                ViewBag.Message = team.TeamMember + " invited Successfully.";
-               
-                return View(team);
+                }
+
+
+                else
+                {
+                    ViewBag.NotFound = "No such User's Email in our database ! please check it.";
+                }
 
 
             }
 
 
-            return View(team);
+
+          
+
+
+                return View(team);
 
         }
 

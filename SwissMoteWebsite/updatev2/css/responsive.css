@@ -1,0 +1,539 @@
+/*
+====================================
+Wide Screen - Others
+====================================
+*/
+@media screen and (min-width: 1201px) and (max-width: 1400px) {
+
+	.task-main {
+		padding: 50px 35px;
+	}
+
+	.task-item ul {
+		padding: 20px 20px 30px;
+	}
+
+	.task-item ul li {
+		padding: 5px 0;
+	}
+
+	.task-item button {
+		font-size: 20px;
+	}
+
+}
+
+
+/*
+====================================
+Medium Screen - Others
+====================================
+*/
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+
+	.header-main {
+	    background: #FFFFFF;
+	    padding: 20px 35px 20px 35px;
+	}
+
+	.project-main .project-table tr th:first-child,
+	.project-main .project-table tr td:first-child {
+	    width: 32%;
+	    padding-left: 36px;
+	}
+
+	.project-main .project-table tr th {
+		font-size: 14px;
+		padding: 20px 5px;
+	}
+
+	.project-main .project-table tr td {
+		font-size: 16px;
+		padding: 20px 5px;
+	}
+
+	.project-main .project-table tr td i {
+		font-size: 9px;
+	}
+
+	.project-main .project-table tr td h4 {
+		font-size: 14px;
+	}
+
+	.invoice-main {
+	    padding: 50px 38px;
+	}
+
+	.invtbl-box {
+		min-height: 750px;
+	}
+
+	.invpd-btm p {
+		font-size: 16px;
+	}
+
+	.invpd-btm {
+		max-width: 225px;
+	}
+
+	.ziehharmonika h3,
+	.ziehharmonika > div {
+		padding-right: 30px;
+	}
+
+	.team-innertbl table tr td {
+		width: 13%;
+	}
+
+	.insight-main {
+	    padding: 60px 20px 20px 34px;
+	}
+
+	.activity-prt table tr th {
+		font-size: 11px;
+	}
+
+	.activity-prt table tr td {
+		font-size: 14px;
+	}
+
+	.activity-prt table tr td strong {
+		font-size: 12px;
+	}
+
+	.activity-prt table tr td img {
+		width: 32px;
+		height: 32px;
+	}
+
+	.team3-pop {
+	    bottom: 100px;
+	}
+
+}
+
+/*
+====================================
+Small Screen - Tablate
+====================================
+*/
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+	.header-part {
+		padding: 24px 30px;
+	}
+
+	.logo img {
+		margin-left: 0;
+	}
+
+	.header-main {
+	    background: #FFFFFF;
+	    padding: 20px 35px 20px 35px;
+	}
+
+	.project-main .project-table tr th:first-child,
+	.project-main .project-table tr td:first-child {
+	    width: 32%;
+	    padding-left: 36px;
+	}
+
+	.project-main .project-table tr th {
+		font-size: 14px;
+		padding: 20px 5px;
+	}
+
+	.project-main .project-table tr td {
+		font-size: 15px;
+		padding: 20px 5px;
+	}
+
+	.project-main .project-table tr td i {
+		font-size: 9px;
+	}
+
+	.project-main .project-table tr td h4 {
+		font-size: 14px;
+	}
+
+	.task-main {
+		padding: 40px 36px;
+	}
+
+	.task-item ul {
+		padding: 30px 20px 30px;
+	}
+
+	.invtbl-box {
+		min-height: 750px;
+	}
+
+	.invpd-btm p {
+		font-size: 16px;
+	}
+
+	.invpd-btm {
+		max-width: 225px;
+	}
+
+	.ziehharmonika h3,
+	.ziehharmonika > div {
+		padding-right: 30px;
+	}
+
+	.team-innertbl table tr td {
+		width: 13%;
+	}
+
+	.insight-main {
+	    padding: 60px 20px 20px 34px;
+	}
+
+	.insight-main {
+		padding-top: 50px;
+	}
+
+	.graph-part {
+	    padding-top: 40px;
+	    padding-left: 30px;
+	    padding-bottom: 20px;
+	    border-radius: 5px;
+	    margin-top: 25px;
+	}
+
+	.activity-prt table tr th {
+		font-size: 11px;
+	}
+
+	.activity-prt table tr td {
+		font-size: 14px;
+	}
+
+	.activity-prt table tr td strong {
+		font-size: 12px;
+	}
+
+	.activity-prt table tr td img {
+		width: 32px;
+		height: 32px;
+	}
+
+	.team3-pop {
+	    bottom: 100px;
+	}
+
+}
+
+/*
+====================================
+Small Screen - Mobile
+====================================
+*/
+@media screen and (max-width: 767px) {
+
+	.header-part {
+		padding: 20px 15px;
+	}
+
+	.header-cnt h4 {
+		font-size: 28px;
+	}
+
+	.logo img {
+		margin-left: 0;
+	}
+
+	.header-cnt h4 span {
+		font-size: 14px;
+		margin-left: 20px;
+	}
+
+	.header-main {
+	    background: #FFFFFF;
+	    padding: 18px 15px 18px 15px;
+	}
+
+	.header-main h4 {
+		font-size: 24px;
+	}
+
+	.header-main a {
+		font-size: 15px;
+		padding: 10px 20px;
+		border-radius: 8.5px;
+	}
+
+	.header-main a img {
+		max-width: 16px;
+		margin-right: 6px;
+	}
+
+	.project-main .project-table tr th:first-child,
+	.project-main .project-table tr td:first-child {
+	    width: 30%;
+	    padding-left: 15px;
+	}
+
+	.project-main .project-table tr th {
+		font-size: 12px;
+		padding: 20px 5px;
+	}
+
+	.project-main .project-table tr td {
+		font-size: 13px;
+		padding: 14px 2px;
+	}
+
+	.project-main .project-table tr td i {
+		font-size: 8px;
+		margin-left: 4px;
+	}
+
+	.project-main .project-table tr td h4 {
+		font-size: 13px;
+	}
+
+	.project-main {
+		padding: 20px 0;
+	}
+
+	.task-main {
+		padding: 25px 15px;
+	}
+
+	.task-item {
+		max-width: 350px;
+		margin: 15px auto;
+	}
+
+	.task-item ul {
+		padding: 30px 20px 30px;
+	}
+
+	.task-item button {
+		font-size: 22px;
+	}
+
+	.invtbl-box {
+		min-height: 320px;
+	}
+
+	.invoice-main {
+		padding: 30px 15px;
+	}
+
+	.invoice-upper form select {
+		width: 48%;
+		margin: 5px 0;
+	}
+
+	.invoice-upper form {
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.invoice-table {
+		padding: 25px 0 15px;
+	}
+
+	.invoice-table h2 {
+		font-size: 25px;
+	}
+
+	.invtbl-box {
+		overflow-x: auto;
+	}
+
+	.invtbl-box table {
+		width: 735px;
+	}
+
+	.invpd-btm p {
+		font-size: 16px;
+	}
+
+	.invpd-btm {
+		max-width: 225px;
+	}
+
+	.invoice-upper a {
+		width: 48%;
+		margin-left: 0;
+		margin-top: 10px;
+	}
+
+	.invtpad-box {
+	    min-height: 280px!important;
+	}
+
+	.team-main {
+		overflow: scroll;
+	}
+
+	.team-table {
+		width: 767px;
+	}
+
+	.team-table table tr th:first-child {
+		padding-left: 16px;
+	}
+
+	.ziehharmonika h3 {
+		padding-right: 30px;
+		padding-left: 15px;
+	}
+
+	.ziehharmonika > div {
+		padding-left: 15px;
+		padding-right: 20px;
+	}
+
+	.team-innertbl table tr td {
+		width: 13%;
+	}
+
+	.popup-area {
+		width: 350px;
+		right: 12px;
+	}
+
+	.popup-left span {
+		display: none;
+	}
+
+	.popup-left ul li a img {
+		width: 25px;
+		height: 25px;
+		margin-right: 0;
+	}
+
+	.popup-left {
+		-ms-flex: 0 0 55px;
+	    flex: 0 0 55px;
+	    max-width: 55px;
+	    padding: 18px 8px;
+	}
+
+	.popup-right {
+	    -ms-flex: 0 0 calc(100% - 55px);
+	    flex: 0 0 calc(100% - 55px);
+	    max-width: calc(100% - 55px);
+	}
+
+	.chat-item form input {
+		width: 170px;
+		padding-right: 37px;
+	}
+
+	.chat-box {
+		padding-bottom: 190px;
+	}
+
+	.chat-item .chat-frm button img {
+		max-width: 16px;
+	}
+
+	.chat-item {
+		padding: 15px;
+	}
+
+	.insight-upper .inv-item4 {
+	    margin-left: 0;
+	}
+
+	.insight-main {
+	    padding: 20px 15px;
+	}
+
+	.graph-part h2 {
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+
+	.graph-part ul li a {
+		font-size: 16px;
+	}
+
+	.graph-part ul {
+		padding-bottom: 5px;
+	}
+
+	.graph-part {
+	    padding-top: 30px;
+	    padding-left: 15px;
+	    padding-bottom: 15px;
+	}
+
+	.tab-upper {
+		display: block;
+	}
+
+	.tab-right {
+		padding-top: 15px;
+	}
+
+	.tab-right a {
+	    font-size: 14px;
+	    padding: 10px 15px;
+	    margin-right: 10px;
+	    margin-left: 0;
+	}
+
+	.tab-right a img {
+	    max-width: 17px;
+	    margin-right: 10px;
+	}
+
+	.tab-table table tr th:first-child {
+		padding-left: 15px;
+		width: 70%;
+	}
+
+	.tabdesigner-tbl table tr th:first-child {
+		padding-left: 40px!important;
+		width: 70%;
+	}
+
+	.insinr-table table tr td:first-child {
+		padding-left: 40px;
+		width: 70%;
+	}
+
+	.ziehharmonika .collapseIcon {
+		font-size: 16px;
+		left: 15px;
+		top: 50%;
+	}
+
+	.tab-table table tr th:last-child {
+		padding-right: 15px;
+	}
+
+	.tabdesigner-tbl table tr th:last-child {
+		padding-right: 15px;
+	}
+
+	.insinr-table table tr td:last-child {
+		padding-right: 15px;
+	}
+
+	.tab-table {
+		padding-bottom: 100px;
+	}
+
+	.activity-prt {
+		overflow-x: auto;
+		padding-bottom: 50px;
+	}
+
+	.activity-prt table {
+		width: 900px;
+	}
+
+	.team3-pop {
+	    bottom: 100px;
+	}
+
+
+
+}
