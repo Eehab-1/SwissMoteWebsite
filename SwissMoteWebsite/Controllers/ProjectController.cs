@@ -20,9 +20,23 @@ namespace SwissMoteWebsite.Controllers
         // GET: Project
         public ActionResult Index()
         {
+
+            string userid = User.Identity.GetUserId();
+
+
+            var projects = db.Projects.Include(p => p.Team);
+            return View(projects.Where(a=>a.CreatedByUserId==userid).ToList());
+        }
+
+
+        public ActionResult D1()
+        {
+
             var projects = db.Projects.Include(p => p.Team);
             return View(projects.ToList());
         }
+
+
 
         // GET: Project/Details/5
         public ActionResult Details(int? id)
@@ -51,6 +65,19 @@ namespace SwissMoteWebsite.Controllers
             ViewBag.TeamId = new SelectList(db.Teams.Where(a=>a.TeamCreatedByUserId== userid), "TeamId", "TeamName");
             return View();
         }
+
+
+        public ActionResult Created()
+        {
+            string userid = User.Identity.GetUserId();
+
+            ViewBag.TeamId = new SelectList(db.Teams.Where(a => a.TeamCreatedByUserId == userid), "TeamId", "TeamName");
+            return View();
+        }
+
+
+
+
 
         // POST: Project/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

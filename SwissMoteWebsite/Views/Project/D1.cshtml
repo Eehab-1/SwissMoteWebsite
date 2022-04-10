@@ -63,11 +63,11 @@
                     </div>
                     <ul>
                         @*<li>
-                                <a href="#">
-                                    <img src="~/updatev2/images/icon-1.svg" alt="">
-                                    Timer
-                                </a>
-                            </li>*@
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-1.svg" alt="">
+                                Timer
+                            </a>
+                        </li>*@
                         <li>
                             <a href="#" id="active">
                                 <img src="~/updatev2/images/icon-2.svg" alt="">
@@ -81,11 +81,11 @@
                             </a>
                         </li>
                         @*<li>
-                                <a href="#">
-                                    <img src="~/updatev2/images/icon-4.svg" alt="">
-                                    Tasks
-                                </a>
-                            </li>*@
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-4.svg" alt="">
+                                Tasks
+                            </a>
+                        </li>*@
                         <li>
                             <a href="#">
                                 <img src="~/updatev2/images/icon-5.svg" alt="">
@@ -105,11 +105,11 @@
                             </a>
                         </li>
                         @*<li>
-                                <a href="#">
-                                    <img src="~/updatev2/images/icon-8.svg" alt="">
-                                    Help
-                                </a>
-                            </li>*@
+                            <a href="#">
+                                <img src="~/updatev2/images/icon-8.svg" alt="">
+                                Help
+                            </a>
+                        </li>*@
                     </ul>
                 </div>
             </div>
@@ -144,62 +144,54 @@
                                     <th></th>
 
                                     @*<th>
-                                            @Html.DisplayNameFor(model => model.Team.TeamCreatedByUserId)
-                                        </th>
+                                        @Html.DisplayNameFor(model => model.Team.TeamCreatedByUserId)
+                                    </th>
 
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Team.TeamName)
-                                        </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Team.TeamName)
+                                    </th>
 
 
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.ProjectName)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Note)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.CreatedByUserName)
-                                        </th>*@
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ProjectName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Note)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CreatedByUserName)
+                                    </th>*@
 
 
                                 </tr>
-
+         
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-
+                                       
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ProjectName)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Team.TeamInsights)
                                         </td>
-
+                                     
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Team.TeamName)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.CreatedByUserName)
                                         </td>
-                                        <td>
-
-                                            @Html.DisplayFor(modelItem => item.IsOn)
-
+                                        <td>                                         
+                                          
+                                                @Html.DisplayFor(modelItem => item.IsOn)
+                                                                                   
                                         </td>
-
+                                       
                                         <td>
-
-                                            <a href="/project/edit/@item.Id">
-                                                <img src="@Url.Content("~/Images/edit_96px.png")" alt="Edit" data-toggle="tooltip" title="Edit" width="20px" height="20px" />
-                                            </a>
-
-                                            &nbsp;
-
-
-                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
-                                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-                                            @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                         </td>
                                     </tr>
                                 }

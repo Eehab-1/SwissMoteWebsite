@@ -201,6 +201,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\delete_48px.png" />
+    <Content Include="Images\edit_96px.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -325,6 +327,9 @@
     <Content Include="Views\Team\InviteMore.cshtml" />
     <Content Include="Views\Shared\AfterLogin_Layout.cshtml" />
     <Content Include="Views\Shared\FigmaMaster.cshtml" />
+    <Content Include="Views\Project\D1.cshtml" />
+    <Content Include="Views\Project\Created.cshtml" />
+    <Content Include="Views\Shared\AfterLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
