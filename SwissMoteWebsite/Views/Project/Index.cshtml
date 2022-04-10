@@ -69,13 +69,13 @@
                                 </a>
                             </li>*@
                         <li>
-                            <a href="#" id="active">
+                            <a href="/project" id="active">
                                 <img src="~/updatev2/images/icon-2.svg" alt="">
                                 Projects
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/team">
                                 <img src="~/updatev2/images/icon-3.svg" alt="">
                                 Teams
                             </a>
@@ -136,7 +136,7 @@
                         <div class="project-main">
                             <table class="project-table">
                                 <tr>
-                                    <th>PROJECTS</th>
+                                    <th>PROJECT</th>
                                     <th>INSIGHTS</th>
                                     <th>TEAM</th>
                                     <th>CLIENT</th>
@@ -194,8 +194,13 @@
                                                 <img src="@Url.Content("~/Images/edit_96px.png")" alt="Edit" data-toggle="tooltip" title="Edit" width="20px" height="20px" />
                                             </a>
 
-                                            &nbsp;
+                                           
 
+                                            <a href="/project/delete/@item.Id">
+                                                <img src="@Url.Content("~/Images/delete_48px.png")" alt="Delete" data-toggle="tooltip" title="Delete" width="20px" height="20px" />
+                                            </a>
+
+                                            @*&nbsp;*@
 
                                             @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
                                             @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@

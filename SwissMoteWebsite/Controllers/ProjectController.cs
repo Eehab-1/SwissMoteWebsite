@@ -92,11 +92,13 @@ namespace SwissMoteWebsite.Controllers
 
             if (ModelState.IsValid)
             {
+                var theuniqueid = Guid.NewGuid().ToString();
 
                 project.CreatedByUserId = userid;
                 project.CreatedByUserName = username;
                 project.CreationDate = DateTime.Now;
                 project.IsOn = true;
+                project.UniqueId = theuniqueid;
 
                 db.Projects.Add(project);
                 db.SaveChanges();
@@ -119,7 +121,12 @@ namespace SwissMoteWebsite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "TeamCreatedByUserId", project.TeamId);
+
+            string userid = User.Identity.GetUserId();
+
+            ViewBag.TeamId = new SelectList(db.Teams.Where(a => a.TeamCreatedByUserId == userid), "TeamId", "TeamName");
+
+           // ViewBag.TeamId = new SelectList(db.Teams, "TeamId", "TeamCreatedByUserId", project.TeamId);
             return View(project);
         }
 
@@ -132,6 +139,9 @@ namespace SwissMoteWebsite.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
+
                 db.Entry(project).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
