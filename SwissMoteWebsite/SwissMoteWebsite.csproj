@@ -330,6 +330,7 @@
     <Content Include="Views\Project\D1.cshtml" />
     <Content Include="Views\Project\Created.cshtml" />
     <Content Include="Views\Shared\AfterLogin.cshtml" />
+    <Content Include="Views\Team\t1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

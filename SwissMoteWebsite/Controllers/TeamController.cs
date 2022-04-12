@@ -37,6 +37,13 @@ namespace SwissMoteWebsite.Controllers
         }
 
 
+        public ActionResult t1()
+        {
+            string userid = User.Identity.GetUserId();
+
+            return View(db.Teams.Where(a => a.TeamCreatedByUserId == userid).ToList());
+        }
+
         public ActionResult InviteMore(int id)
         {
 
@@ -186,7 +193,27 @@ namespace SwissMoteWebsite.Controllers
         // GET: Team/Create
         public ActionResult Create()
         {
-            return View();
+
+            Team team = new Team
+            {
+                
+                TeamInsights = 0,
+                MemberInsights = 0,
+                TeamMember = "",
+                MemberHourlyRate = 0,
+                MemberChatKey = "",
+                TeamStatus = true,
+                MemberStatus = true,
+                
+            };
+
+
+            return View(team);
+
+
+
+
+
         }
 
         // POST: Team/Create
