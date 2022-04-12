@@ -62,7 +62,9 @@ namespace SwissMoteWebsite.Controllers
         {
             string userid = User.Identity.GetUserId();
 
-            ViewBag.TeamId = new SelectList(db.Teams.Where(a=>a.TeamCreatedByUserId== userid), "TeamId", "TeamName");
+            var UniqueTeamName = db.Teams.GroupBy(x => x.TeamName).Select(x => x.FirstOrDefault());
+
+            ViewBag.TeamId = new SelectList(UniqueTeamName.Where(a=>a.TeamCreatedByUserId== userid), "TeamId", "TeamName");
             return View();
         }
 

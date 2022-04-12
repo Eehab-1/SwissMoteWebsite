@@ -1,5 +1,6 @@
 ﻿
 @model IEnumerable<SwissMoteWebsite.Models.Team>
+@using SwissMoteWebsite.Models;
 
 
 
@@ -7,7 +8,13 @@
 
 
 
-@{ Layout = null; }
+@{ Layout = null;
+
+
+      ApplicationDbContext db = new ApplicationDbContext();
+
+
+    }
 
 
 
@@ -131,7 +138,7 @@
                                     <tr>
                                         <th>TEAMS</th>
                                         <th>INSIGHTS</th>
-                                        <th>PROJECTS</th>
+                                        <th>Avg Rate</th>
                                         <th>STATUS</th>
                                         <th>CLIENT</th>
                                         <th></th>
@@ -142,43 +149,75 @@
                                     <div class="ziehharmonika">
                                         <h3 class="team-maintbl">
                                             <table>
+
+                                                @{ 
+                                                    List<string> TeamNameList = new List<string>();
+
+                                                    List<(string, double, double, string)> InnerList = new List<(string, double, double, string)>();
+
+                                                }
+
                                                 @foreach (var item in Model)
                                                 {
-                                                    <tr>
-                                                        <td><h4>  @Html.DisplayFor(modelItem => item.TeamName) </h4></td>
-                                                        <td>45H</td>
-                                                        <td>Nutrohaler</td>
-                                                        <td>Actif <span><i class="fas fa-circle"></i></span></td>
-                                                        <td>Jack</td>
-                                                        <td>
-                                                            <a href="#"><i class="fas fa-ellipsis-v"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                }
+
+                                                <tr>
+
+                                                    @{
+                                                        if (!TeamNameList.Contains(item.TeamName))
+                                                        {
+                                                            <td>@Html.DisplayFor(modelItem => item.TeamName)</td>
+
+
+                                                            double avgrate = db.Teams
+                                                                .Where(a => a.TeamName == item.TeamName)
+                                                                .Select(a => a.MemberHourlyRate).Average();
+
+                                                            double avgraterouted = Math.Round(avgrate, 2, MidpointRounding.AwayFromZero);
+                                                            <td>0H</td>
+                                                            <td>$@avgraterouted /H</td>
+                                                            <td>Active</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.ClientName)</td>
+                                                            <td>
+                                                                <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                                                            </td>
+
+                                                     
+                                                        }
+                                                    }
+
+
+                                                    @{
+                                                        TeamNameList.Add(item.TeamName);
+                                                    }
+
+
+
+
+
+
+
+
+                                                </tr>
+                                                        }
                                                 </table>
                                         </h3>
                                         <div class="team-innertbl">
                                             <table>
+                                                
                                                 <tr>
-                                                    <td>Nacer Benaissa</td>
-                                                    <td>15H</td>
-                                                    <td>$10/H</td>
+                                                    <td>emp1@mail.com</td>
+                                                    <td> 0H</td>
+                                                    <td>$6.33 /H</td>
                                                     <td><strong>Online</strong></td>
                                                     <td></td>
                                                     <td><a href="#">Contact</a></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Tarak Maniar</td>
-                                                    <td>30H</td>
-                                                    <td>$10/H</td>
-                                                    <td><strong>Online</strong></td>
-                                                    <td></td>
-                                                    <td><a href="#">Contact</a></td>
-                                                </tr>
+
+                                              
                                             </table>
                                         </div>
 
-                                        <h3 class="team-maintbl">
+                                        @*<h3 class="team-maintbl">
                                             <table>
                                                 <tr>
                                                     <td><h4>Web Developers</h4></td>
@@ -211,7 +250,7 @@
                                                     <td><a href="#">Contact</a></td>
                                                 </tr>
                                             </table>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
                             </div>
