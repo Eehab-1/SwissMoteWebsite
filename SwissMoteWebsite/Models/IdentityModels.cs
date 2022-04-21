@@ -63,5 +63,9 @@ namespace SwissMoteWebsite.Models
         public System.Data.Entity.DbSet<SwissMoteWebsite.Models.Team> Teams { get; set; }
 
         public System.Data.Entity.DbSet<SwissMoteWebsite.Models.Project> Projects { get; set; }
+
+        public System.Data.Entity.DbSet<SwissMoteWebsite.Models.Invoice> Invoices { get; set; }
+
+        public System.Data.Entity.DbSet<SwissMoteWebsite.Models.ImageProof> ImageProofs { get; set; }
     }
 }

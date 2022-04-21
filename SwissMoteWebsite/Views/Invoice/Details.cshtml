@@ -1,0 +1,123 @@
+﻿@model SwissMoteWebsite.Models.Invoice
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invoice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceFromUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceFromUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvoiceToUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceToUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HourlyRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HourlyRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectSharedUniqueId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectSharedUniqueId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

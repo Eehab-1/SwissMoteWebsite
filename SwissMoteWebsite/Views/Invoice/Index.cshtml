@@ -1,0 +1,106 @@
+﻿@model IEnumerable<SwissMoteWebsite.Models.Invoice>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceFromUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceToUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HourlyRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectSharedUniqueId)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceFromUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceToUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HourlyRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPayment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectSharedUniqueId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

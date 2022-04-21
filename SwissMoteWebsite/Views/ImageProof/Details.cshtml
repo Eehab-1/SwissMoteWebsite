@@ -1,0 +1,99 @@
+﻿@model SwissMoteWebsite.Models.ImageProof
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ImageProof</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageFileName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageFileName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadByUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectUniqueId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectUniqueId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadedToUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadedToUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UploadedDateWithoutTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UploadedDateWithoutTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KeyBoardHits)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KeyBoardHits)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MouseClicks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MouseClicks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DesktopUniqueSession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DesktopUniqueSession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DesktopTimer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DesktopTimer)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
