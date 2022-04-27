@@ -1,0 +1,130 @@
+﻿
+
+
+
+
+@using PagedList
+@using PagedList.Mvc
+
+
+
+@model IPagedList<SwissMoteWebsite.Models.Invoice>
+
+@{ ViewBag.Title = "Freelancers Invoices";
+                Layout = "~/Views/Shared/FigmaMaster.cshtml"; }
+
+<br />
+<br />
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProjectName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().InvoiceFromUser)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FromUserId)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.InvoiceToUser)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.ToUserId)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().TotalHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TotalPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().HourlyRate)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().IsPaid)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ProjectSharedUniqueId)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProjectName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InvoiceFromUser)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.FromUserId)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.InvoiceToUser)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.ToUserId)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalHours)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TotalPayment)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HourlyRate)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.IsPaid)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.ProjectSharedUniqueId)
+        </td>*@
+    <td>
+        @*@Html.ActionLink("Mark As Paid", "Edit", new { id = item.Id }) |*@
+
+        <a href="/Invoice/Edit/@item.Id">
+            <img src="@Url.Content("~/assets/img/icons/paid.png")" alt="Mark as Paid" data-toggle="tooltip" title="Mark as Paid" width="20px" height="20px" />
+        </a>
+
+
+        &nbsp;
+
+        <a href="/Invoice/Details/@item.Id">
+            <img src="@Url.Content("~/assets/img/icons/details.png")" alt="Details" data-toggle="tooltip" title="Details" width="20px" height="20px" />
+        </a>
+
+        @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@
+        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+    </td>
+</tr>}
+
+</table>
+
+
+@Html.PagedListPager(Model, page => Url.Action("Received", new { page, searchBy = Request.QueryString["search"] })
+, new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })

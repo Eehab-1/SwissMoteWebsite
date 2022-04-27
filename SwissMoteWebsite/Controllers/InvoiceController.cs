@@ -178,159 +178,170 @@ namespace SwissMoteWebsite.Controllers
         }
 
         // GET: Invoice/Create
-        //public ActionResult Create()
-        //{
+        public ActionResult Create()
+        {
 
-        //    var actionid = Url.RequestContext.RouteData.Values["id"];
+            var actionid = Url.RequestContext.RouteData.Values["id"];
 
-        //    int id = Convert.ToInt32(actionid);
-
-
-        //    string currentuserid = User.Identity.GetUserId();
-
-        //    string workeruserid = db.InvitationInboxes.Where(p => p.Id == id)
-        //        .Select(f => f.SentToUserId).FirstOrDefault();
-
-        //    if (currentuserid == workeruserid)
-        //    {
+            int id = Convert.ToInt32(actionid);
 
 
-        //        var projectname = db.InvitationInboxes.Where(p => p.Id == id)
-        //            .Select(p => p.ProjectName).FirstOrDefault();
+            string currentuserid = User.Identity.GetUserId();
 
-        //        var projectuniqueid = db.InvitationInboxes.Where(p => p.Id == id)
-        //            .Select(p => p.ProjectInvitationUniqueId).FirstOrDefault();
+            string currentusername = User.Identity.GetUserName();
 
-        //        ViewBag.ProjectName = projectname;
+            // find teamid from project => find teamuniqueid from teamid => find teammember 
 
+            string teamuniqueid = db.Projects.Where(p => p.Id == id).Select(p => p.Team.TeamUniqueId).FirstOrDefault();
 
-        //        Invoice invoice = new Invoice
-        //        {
-        //            ProjectName = projectname,
-        //            ProjectSharedUniqueId = projectuniqueid
-
-        //        };
+            bool teammembersameuser = db.Teams.Where(t => t.TeamUniqueId == teamuniqueid).Any(a => a.TeamMember == currentusername);
 
 
-        //        return View(invoice);
+            //string workeruserid = db.InvitationInboxes.Where(p => p.Id == id)
+            //    .Select(f => f.SentToUserId).FirstOrDefault();
 
-        //    }
+            if (teammembersameuser)
+            {
 
-        //    else
-        //    {
-        //        return View();
-        //    }
 
-        //}
+              
+
+                string projectname = db.Projects.Where(a => a.Id == id).Select(a => a.ProjectName).FirstOrDefault();
+
+                string projectuniqueid = db.Projects.Where(a => a.Id == id)
+                    .Select(a => a.UniqueId).FirstOrDefault();
+
+                ViewBag.ProjectName = projectname;
+
+
+                Invoice invoice = new Invoice
+                {
+                    ProjectName = projectname,
+                    ProjectSharedUniqueId = projectuniqueid
+
+                };
+
+
+                return View(invoice);
+
+            }
+
+            else
+            {
+                return View();
+            }
+
+        }
 
         // POST: Invoice/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,ProjectName,InvoiceFromUser,FromUserId,InvoiceToUser,ToUserId,TotalHours,HourlyRate,FromDate,ToDate,CreationDate,IsPaid,ProjectSharedUniqueId")] Invoice invoice)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userid = User.Identity.GetUserId();
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,ProjectName,InvoiceFromUser,FromUserId,InvoiceToUser,ToUserId,TotalHours,HourlyRate,FromDate,ToDate,CreationDate,IsPaid,ProjectSharedUniqueId")] Invoice invoice)
+        {
+            if (ModelState.IsValid)
+            {
+                var userid = User.Identity.GetUserId();
 
-        //        var username = User.Identity.GetUserName();
+                var username = User.Identity.GetUserName();
 
-        //        string projectshareduniqueid = invoice.ProjectSharedUniqueId;
+                string projectshareduniqueid = invoice.ProjectSharedUniqueId;
 
-        //        var touserid = db.ProjectInvitations.Where(p => p.UniqueId == projectshareduniqueid)
-        //            .Select(p => p.CreatedByUserId).FirstOrDefault();
+                var touserid = db.Projects.Where(p => p.UniqueId == projectshareduniqueid)
+                    .Select(p => p.CreatedByUserId).FirstOrDefault();
 
-        //        int theid = db.InvitationInboxes.Where(i => i.ProjectInvitationUniqueId == projectshareduniqueid)
-        //            .Where(i => i.SentToUserId == userid).Select(i => i.Id).FirstOrDefault();
+                int theid = db.Projects.Where(i => i.UniqueId == projectshareduniqueid)
+                    .Select(a => a.Id).FirstOrDefault();
+                  //  .Where(i => i.SentToUserId == userid).Select(i => i.Id).FirstOrDefault();
 
-        //        var invoicetouser = db.Users.Where(u => u.Id == touserid).Select(u => u.UserName).FirstOrDefault();
+                var invoicetouser = db.Users.Where(u => u.Id == touserid).Select(u => u.UserName).FirstOrDefault();
 
-        //        invoice.InvoiceFromUser = username;
-        //        invoice.FromUserId = userid;
-        //        invoice.ToUserId = touserid;
-        //        invoice.InvoiceToUser = invoicetouser;
-        //        invoice.CreationDate = DateTime.UtcNow;
-        //        invoice.TotalHours = TotalHours(invoice.FromDate, invoice.ToDate, theid);
-        //        invoice.TotalPayment = invoice.HourlyRate * invoice.TotalHours;
+                invoice.InvoiceFromUser = username;
+                invoice.FromUserId = userid;
+                invoice.ToUserId = touserid;
+                invoice.InvoiceToUser = invoicetouser;
+                invoice.CreationDate = DateTime.UtcNow;
+                invoice.TotalHours = TotalHours(invoice.FromDate, invoice.ToDate, theid);
+                invoice.TotalPayment = invoice.HourlyRate * invoice.TotalHours;
 
-        //        db.Invoices.Add(invoice);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+                db.Invoices.Add(invoice);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-        //    return View(invoice);
-        //}
-
-
-
-
-
-//        public double TotalHours(string fromdate, string todate, int theid)
-//        {
-
-//            string s1 = fromdate;
-//            DateTime dfrom = Convert.ToDateTime(s1);
-
-//            string s2 = todate;
-//            DateTime dto = Convert.ToDateTime(s2);
+            return View(invoice);
+        }
 
 
 
-//            var userid = User.Identity.GetUserId();
+
+
+        public double TotalHours(string fromdate, string todate, int theid)
+        {
+
+            string s1 = fromdate;
+            DateTime dfrom = Convert.ToDateTime(s1);
+
+            string s2 = todate;
+            DateTime dto = Convert.ToDateTime(s2);
 
 
 
-//            int id = theid;
-
-//            string projectsharedid = db.InvitationInboxes.Where(i => i.Id == id)
-//                .Select(i => i.ProjectInvitationUniqueId).FirstOrDefault();
-
-//            var ThisProjectThisUserList = db.ImageProofs
-//                .Where(i => i.ProjectUniqueId == projectsharedid)
-//                .Where(i => i.UploadByUserId == userid);
+            var userid = User.Identity.GetUserId();
 
 
 
-//            var lista = ThisProjectThisUserList.ToList()
-//  .GroupBy(x => x.DesktopUniqueSession,
-//           (k, g) => g.Aggregate((a, x) => (x.DesktopTimer != a.DesktopTimer) ? x : a));
+            int id = theid;
 
-//            var listb = lista.Select(a => new
-//            {
-//                thedate = a.UploadedDateWithoutTime,
-//                desktoptimer = myfunctions.ToSeconds(a.DesktopTimer)
+            string projectsharedid = db.Projects.Where(i => i.Id == id)
+                .Select(i => i.UniqueId).FirstOrDefault();
 
-//            });
+            var ThisProjectThisUserList = db.ImageProofs
+                .Where(i => i.ProjectUniqueId == projectsharedid)
+                .Where(i => i.UploadByUserId == userid);
 
 
 
-//            var Datab = listb.GroupBy(r => r.thedate)
-//.Select(
-//g => new
-//{
-//    date = myfunctions.ChangeDateFormat(g.Key),
-//    desktoptimerx = myfunctions.ToMinutes(g.Sum(s => s.desktoptimer)),
-//});
+            var lista = ThisProjectThisUserList.ToList()
+  .GroupBy(x => x.DesktopUniqueSession,
+           (k, g) => g.Aggregate((a, x) => (x.DesktopTimer != a.DesktopTimer) ? x : a));
 
-//            var Datax = listb.GroupBy(r => r.thedate)
-//.Select(
-//g => new
-//{
-//    date = myfunctions.ToDateType(g.Key),
-//    desktoptimerx = myfunctions.ToMinutes(g.Sum(s => s.desktoptimer)),
-//});
+            var listb = lista.Select(a => new
+            {
+                thedate = a.UploadedDateWithoutTime,
+                desktoptimer = myfunctions.ToSeconds(a.DesktopTimer)
 
-//            var TotalMinutes = Datax.Where(d => d.date >= dfrom).Where(d => d.date <= dto)
-//                .Select(d => d.desktoptimerx).Sum();
+            });
 
-//            var TotalHours = (TotalMinutes / 60);
 
-//            var hoursatrange = Math.Round(TotalHours, 2);
 
-//            return hoursatrange;
+            var Datab = listb.GroupBy(r => r.thedate)
+.Select(
+g => new
+{
+    date = myfunctions.ChangeDateFormat(g.Key),
+    desktoptimerx = myfunctions.ToMinutes(g.Sum(s => s.desktoptimer)),
+});
 
-//        }
+            var Datax = listb.GroupBy(r => r.thedate)
+.Select(
+g => new
+{
+    date = myfunctions.ToDateType(g.Key),
+    desktoptimerx = myfunctions.ToMinutes(g.Sum(s => s.desktoptimer)),
+});
+
+            var TotalMinutes = Datax.Where(d => d.date >= dfrom).Where(d => d.date <= dto)
+                .Select(d => d.desktoptimerx).Sum();
+
+            var TotalHours = (TotalMinutes / 60);
+
+            var hoursatrange = Math.Round(TotalHours, 2);
+
+            return hoursatrange;
+
+        }
 
 
 

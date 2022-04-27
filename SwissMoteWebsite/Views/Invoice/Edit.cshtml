@@ -5,136 +5,144 @@
     Layout = "~/Views/Shared/FigmaMaster.cshtml";
 }
 
-<h2>Edit</h2>
+
+
 
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Invoice</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+@Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.InvoiceFromUser, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.InvoiceFromUser, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InvoiceFromUser, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <br />
+                    <br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FromUserId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FromUserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FromUserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.InvoiceToUser, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.InvoiceToUser, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InvoiceToUser, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ToUserId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ToUserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ToUserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.InvoiceFromUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.InvoiceFromUser, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceFromUser, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalHours, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalHours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalHours, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.FromUserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.FromUserId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FromUserId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.InvoiceToUser, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.InvoiceToUser, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.InvoiceToUser, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalPayment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalPayment, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalPayment, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    
+                        @Html.LabelFor(model => model.IsPaid, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsPaid) <p>Check "IsPaid" box if you paid this invoice.</p>
+                                @Html.ValidationMessageFor(model => model.IsPaid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                  
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                 
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-info" />
+                        </div>
+                    </div>
+              
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreationDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsPaid, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsPaid)
-                    @Html.ValidationMessageFor(model => model.IsPaid, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+                                <div class="form-group">
+                                    @Html.HiddenFor(model => model.ToUserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.HiddenFor(model => model.ToUserId, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ToUserId, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectSharedUniqueId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectSharedUniqueId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectSharedUniqueId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                                <div class="form-group">
+                                                    @Html.HiddenFor(model => model.TotalHours, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="col-md-10">
+                                                        @Html.HiddenFor(model => model.TotalHours, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.TotalHours, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+                                                                <div class="form-group">
+                                                                    @Html.HiddenFor(model => model.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                    <div class="col-md-10">
+                                                                        @Html.HiddenFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                                                                                <div class="form-group">
+                                                                                    @Html.HiddenFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                                    <div class="col-md-10">
+                                                                                        @Html.HiddenFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                                                        @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                                <div class="form-group">
+                                                                                                    @Html.HiddenFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                                                    <div class="col-md-10">
+                                                                                                        @Html.HiddenFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                                                                        @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                                <div class="form-group">
+                                                                                                                    @Html.HiddenFor(model => model.CreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                                                                    <div class="col-md-10">
+                                                                                                                        @Html.HiddenFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
+                                                                                                                        @Html.ValidationMessageFor(model => model.CreationDate, "", new { @class = "text-danger" })
+                                                                                                                    </div>
+                                                                                                                </div>
+
+
+
+                                                                                                                                <div class="form-group">
+                                                                                                                                    @Html.HiddenFor(model => model.ProjectSharedUniqueId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                                                                                    <div class="col-md-10">
+                                                                                                                                        @Html.HiddenFor(model => model.ProjectSharedUniqueId, new { htmlAttributes = new { @class = "form-control" } })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.ProjectSharedUniqueId, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+<p>
+
+    <br/>
+    <br/>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to Invoices", "received")
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

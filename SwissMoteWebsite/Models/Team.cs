@@ -21,6 +21,9 @@ namespace SwissMoteWebsite.Models
 
         public string TeamMember { get; set; }
 
+
+        public string TeamMemberUserId { get; set; }
+
         public double TeamInsights { get; set; }
 
         public double MemberInsights { get; set; }

@@ -126,10 +126,15 @@ namespace SwissMoteWebsite.Controllers
                     else if (!IsInvited)
                     {
 
+                        //will be used as apikey 
+                        string teammemberuserid = db.Users.Where(a => a.Email == team.TeamMember)
+                            .Select(a => a.Id).FirstOrDefault();
+
                         string chatkey = db.Users.Where(a => a.Email == team.TeamMember)
                             .Select(a => a.ChatKey).FirstOrDefault();
 
                         team.MemberChatKey = chatkey;
+                        team.TeamMemberUserId = teammemberuserid;
                         db.Teams.Add(team);
                         db.SaveChanges();
                         ViewBag.Message = team.TeamMember + " invited Successfully.";

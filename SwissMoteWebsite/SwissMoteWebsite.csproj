@@ -357,6 +357,9 @@
     <Content Include="Views\ImageProof\Details.cshtml" />
     <Content Include="Views\ImageProof\Edit.cshtml" />
     <Content Include="Views\ImageProof\Index.cshtml" />
+    <Content Include="Views\Invoice\Received.cshtml" />
+    <Content Include="Views\Invoice\PaymentInfo.cshtml" />
+    <Content Include="Views\Invoice\PaymentInfoShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
