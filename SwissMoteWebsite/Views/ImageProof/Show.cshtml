@@ -1,0 +1,127 @@
+﻿
+
+
+@using PagedList
+@using PagedList.Mvc
+
+
+@model IPagedList<SwissMoteWebsite.Models.ImageProof>
+
+
+@{ var actionid = Url.RequestContext.RouteData.Values["id"];
+
+    //int id = Convert.ToInt32(actionid);
+
+    string id = actionid.ToString();
+
+
+    ViewBag.Id = id; }
+
+<style>
+    .intro {
+        color: darkblue;
+        font: bolder;
+        font-size: large
+    }
+</style>
+
+<br />
+<br />
+
+<div class="row">
+
+
+
+
+    <div class="col-md-3" style="color:black">
+
+        <b>Freelancer:</b>  @ViewBag.EmailUserName
+
+    </div>
+
+    <div class="col-md-3" style="color:black">
+
+        <b>Project Name: </b> @ViewBag.ProjectName
+
+    </div>
+
+    <div class="col-md-3" style="color:green">
+
+        @Html.ActionLink("View Chart", "ProgressChart", new { id = ViewBag.Id }, new { @class = "intro" })
+
+
+
+    </div>
+
+</div>
+
+<br />
+
+<div class="row">
+
+
+
+
+    <div class="col-md-3" style="color:darkblue">
+
+        <b>Total</b> Mouse Clicks: <b>@ViewBag.TotalMouseClicks</b>
+
+    </div>
+
+    @*<div class="col-md-3" style="color:darkblue">
+
+            <b>Today </b>Mouse Clicks: <b>@ViewBag.TodayMouseClicks</b>
+
+        </div>*@
+
+    <div class="col-md-3" style="color:brown">
+
+        <b>Total </b> KeyPresses: <b>@ViewBag.TotalKeyPresses</b>
+
+    </div>
+    @*<div class="col-md-3" style="color:brown">
+
+            <b>Today</b> KeysPresses: <b>@ViewBag.TodayKeyPresses</b>
+
+
+        </div>*@
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="row">
+
+    <table class="table">
+
+        </br>
+        <br />
+
+
+        @foreach (var item in Model)
+        {
+<div class="col-md-3">
+
+
+    @*@Html.DisplayFor(modelItem => item.ImageFileName)*@
+    <img src="@Url.Content("~/UploadedFiles/" + item.ImageFileName)" width="250" height="250" alt=item.ImageFileName />
+
+
+
+</div>}
+
+    </table>
+
+
+</div>
+
+
+@Html.PagedListPager(Model, page => Url.Action("Show", new { page, searchBy = Request.QueryString["search"] })
+, new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })

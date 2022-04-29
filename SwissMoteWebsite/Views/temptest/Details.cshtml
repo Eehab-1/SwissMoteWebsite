@@ -1,0 +1,114 @@
+﻿@model SwissMoteWebsite.Models.Team
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamUniqueId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamUniqueId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamCreatedByUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamCreatedByUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamMember)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamMember)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamMemberUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamMemberUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamInsights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamInsights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberInsights)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberInsights)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberHourlyRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberHourlyRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MemberChatKey)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MemberChatKey)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

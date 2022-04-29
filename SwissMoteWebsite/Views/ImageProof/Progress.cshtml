@@ -1,0 +1,155 @@
+﻿
+
+
+
+
+@using PagedList
+@using PagedList.Mvc
+
+
+@model IPagedList<SwissMoteWebsite.Models.Project>
+
+@using SwissMoteWebsite.Models
+
+@{ ViewBag.Title = "Progress";
+                Layout = "~/Views/Shared/FigmaMaster.cshtml"; }
+
+<br />
+<br />
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProjectName)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.CreatedByUserName)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.CreatedByUserId)
+            </th>*@
+
+
+
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.First().Team.TeamName)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Invited_UserId)
+            </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().InvitationSentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().InvitationAcceptedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().invitedrole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().invitationstatus)
+        </th>*@
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.IsOn)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProjectName)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.CreatedByUserName)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.CreatedByUserId)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.Team.TeamName)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Invited_UserId)
+        </td>*@
+    @*<td>
+        @Html.DisplayFor(modelItem => item.InvitationSentDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InvitationAcceptedDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.invitedrole)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.invitationstatus)
+    </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.IsOn)
+        </td>*@
+    <td>
+
+        @*@{*@
+        @*if (item.invitationstatus == (InvitationStatus)0)
+            {*@
+        @*@{ ApplicationDbContext db = new ApplicationDbContext();
+
+                            var thechatkey = db.Users.Where(u => u.Id == item.Invited_UserId).Select(u => u.ChatKey).FirstOrDefault();
+
+                            ViewBag.TheChatKey = thechatkey; }*@
+
+
+        @*@Html.ActionLink("Invite More", "InviteMore", new { id = item.Id })*@
+        @*@Html.ActionLink("View Progress", "Show", "ImageProof", new { id = item.Id }, null)*@
+
+        <a href="/ImageProof/ProgressByMember/@item.Id">
+            <img src="@Url.Content("~/assets/img/icons/progress.png")" alt="View Progress" data-toggle="tooltip" title="View Progress" width="20px" height="20px" />
+        </a>
+
+        &nbsp;
+
+
+        @*@Html.ActionLink(" Private Chat", "PrivateChat", new { id = item.Id})*@
+
+
+        @*<a href="/ChatModel/index?chatkey=@ViewBag.TheChatKey">
+            <img src="@Url.Content("~/assets/img/icons/chat.png")" alt="Private Chat" data-toggle="tooltip" title="Private Chat" width="20px" height="20px" />
+        </a>*@
+
+        &nbsp;
+
+
+        @*add private chat action later*@
+
+        @*}*@
+        @*}*@
+
+
+        @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+    </td>
+</tr>}
+
+</table>
+
+
+
+@Html.PagedListPager(Model, page => Url.Action("Progress", new { page, searchBy = Request.QueryString["search"] })
+, new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })

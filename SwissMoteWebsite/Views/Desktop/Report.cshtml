@@ -1,0 +1,113 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Report";
+
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+}
+
+
+
+<br />
+<br />
+
+<p>Your Total Working Hours in this project @ViewBag.TotalHours Hour(s)</p>
+
+<br />
+
+<p><b>@ViewBag.ProjectName Project</b></p>
+
+
+
+<br />
+<br />
+<div id="divLineChart" style="width:600px; height:300px">
+</div>
+
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+@*<script type="text/javascript" src="https://www.google.com/jsapi?autoload=
+    {'modules':[{'name':'visualization','version':'1.1','packages':
+    ['corechart']}]}"></script>*@
+
+
+<script>
+    $(document).ready(function () {
+        //Load Data Here
+
+        var id = @(ViewBag.Id);
+
+        var chartData = null;
+        $.ajax({
+            url: '/Desktop/TimerJson/'+id,
+            type: 'GET',
+            dataType: 'json',
+            data: '',
+            success: function (d) {
+                chartData = d;
+            },
+            error: function () {
+                alert('Error!');
+            }
+        }).done(function () {
+
+            timeout1 = setInterval(
+                function () {
+
+                    drawLineChart(chartData);
+
+                    clearInterval(timeout1);
+                }, 100);
+
+        });
+    });
+    function drawLineChart(d) {
+        var chartData = d;
+        var data = null;
+        data = google.visualization.arrayToDataTable(chartData);
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, {
+            type: 'number',
+            label: data.getColumnLabel(0),
+            calc: function () { return 0; }
+        }
+        ]);
+        var chart = new google.visualization.LineChart($('#divLineChart')[0]); //returns a HTML DOM Object.  document.getElementById('chart_div')
+        var options = {
+            title: 'Working Report',
+            legend: 'bottom',
+            colors: ['blue', '#009900'],
+            hAxis: {
+                title: 'Date',
+                format: '#'
+            },
+            vAxis: {
+                minValue: 0,
+                maxValue: @(ViewBag.MaxValue),
+                title: 'Minutes'
+            },
+            chartArea: {
+                left: 100, top: 50, width: '70%', height: '50%'
+            },
+            animation: {
+                duration: 1000
+            },
+        };
+        var runFirstTime = google.visualization.events.addListener(chart, 'ready', function () {
+            google.visualization.events.removeListener(runFirstTime);
+            chart.draw(data, options);
+        });
+        chart.draw(view, options);
+    }
+    google.load('visualization', '1', { packages: ['corechart'] });
+</script>
+
+
+
