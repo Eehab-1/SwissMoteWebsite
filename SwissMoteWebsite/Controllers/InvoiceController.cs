@@ -12,6 +12,7 @@ using PagedList;
 
 namespace SwissMoteWebsite.Controllers
 {
+    [Authorize]
     public class InvoiceController : Controller
     {
 
@@ -97,6 +98,8 @@ namespace SwissMoteWebsite.Controllers
                 string chatkey = db.Users.Where(u => u.Id == invoicefrom).Select(u => u.ChatKey).FirstOrDefault();
 
                 ViewBag.ChatKey = chatkey;
+
+               
 
                 return View(invoice);
 
