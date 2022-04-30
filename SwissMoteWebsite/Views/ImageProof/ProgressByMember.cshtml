@@ -11,6 +11,12 @@
 
 <h2>Index</h2>
 
+@{
+   var actionid = Url.RequestContext.RouteData.Values["id"];
+
+int projectid = Convert.ToInt32(actionid);
+}
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -95,9 +101,28 @@
                 @Html.DisplayFor(modelItem => item.MemberChatKey)
             </td>
             <td>
-                @Html.ActionLink("Show", "Show", new { id = item.TeamMemberUserId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })
+                @*@Html.ActionLink("Show", "Show", new { id = item.TeamMemberUserId })*@
+
+                @{
+                    ViewBag.empid = "?empid=";
+                }
+
+
+
+                @*"/show?empid"+@item.TeamMemberUserId + "&prounid="+ @projectid*@
+
+                @*@Html.ActionLink("Show", "Show" + ViewBag.empid + item.TeamMemberUserId + "&prounid=" + @projectid)*@
+
+                @Html.ActionLink(
+     "some text",
+     "show",
+     "ImageProof",
+     new { empid = item.TeamMemberUserId , proid = projectid },
+     null
+ )
+
+                @*@Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })*@
             </td>
         </tr>
     }

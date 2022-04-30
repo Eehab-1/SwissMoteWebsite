@@ -1,0 +1,336 @@
+﻿@*@{
+
+        var actionid = Url.RequestContext.RouteData.Values["id"];
+
+        int id = Convert.ToInt32(actionid);
+
+        ViewBag.Id = id;
+
+
+        //Get minValue and maxValue
+
+
+
+
+
+    }*@
+
+@{
+
+    var theempid = Request.QueryString["empid"];
+
+    var theprojid = Request.QueryString["proid"];
+
+   
+
+}
+
+
+<input type="hidden" id="empid"  value=@theempid />
+
+<input type="hidden" id="proid" value=@theprojid />
+
+
+<br />
+
+<h2>Progress Chart</h2>
+<br />
+
+<h5><b>Project Name:</b> @ViewBag.ProjectName</h5>
+<h5> <b>Freelancer:</b>   @ViewBag.UserEmail</h5>
+
+
+
+
+
+
+<div class="row">
+
+
+
+    <div class="col-md-6">
+        <div id="divLineChart3" style="width:600px; height:300px">
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div id="divLineChart" style="width:600px; height:300px">
+
+        </div>
+    </div>
+
+
+
+    <div class="col-md-6">
+
+        <div id="divLineChart2" style="width:600px; height:300px">
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var theid = @(ViewBag.Id);
+
+        var theempid = $('#empid').val();
+
+        var theproid = $('#proid').val();
+
+
+
+        //Load MouseClicksData Here
+        var chartData = null;
+        $.ajax({
+            url: '/ImageProof/MouseClicksData?empid=' + theempid + '&proid=' + theproid,
+            type: 'GET',
+            dataType: 'json',
+            data: '',
+            success: function (d) {
+                chartData = d;
+            },
+            error: function () {
+                alert('Error!');
+            }
+        }).done(function () {
+
+            timeout2 = setInterval(
+                function () {
+
+            drawLineChart(chartData);
+
+                    clearInterval(timeout2);
+                }, 100);
+
+        });
+
+         var theid2 = @(ViewBag.Id);
+
+        //Load Data Here keypress
+        var chartData2 = null;
+        $.ajax({
+            url: '/ImageProof/KeyPressesData?empid=' + theempid + '&proid=' + theproid,
+            type: 'GET',
+            dataType: 'json',
+            data: '',
+            success: function (d) {
+                chartData2 = d;
+            },
+            error: function () {
+                alert('Error!');
+            }
+        }).done(function () {
+
+            timeout1 = setInterval(
+                function () {
+
+            drawLineChart2(chartData2);
+
+            clearInterval(timeout1);
+        }, 100);
+
+        });
+
+
+
+ //Load work progress :
+
+          @*var theid3 = @(ViewBag.InvitationInboxesId);*@
+
+       
+
+
+        var chartData3 = null;
+        $.ajax({
+            url: '/ImageProof/TimerJsonEmployerSide?empid=' + theempid+ '&proid=' + theproid ,
+            type: 'GET',
+            dataType: 'json',
+            data: '',
+            success: function (d) {
+                chartData3 = d;
+            },
+            error: function () {
+                alert('Error!');
+            }
+        }).done(function () {
+
+            timeout3 = setInterval(
+                function () {
+
+            drawLineChart3(chartData3);
+
+            clearInterval(timeout3);
+        }, 100);
+
+        });
+
+
+
+
+
+    });
+
+
+         function drawLineChart(d) {
+
+        var themax = @(ViewBag.MaxMouseClicks) ;
+
+        var chartData = d;
+        var data = null;
+        data = google.visualization.arrayToDataTable(chartData);
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, {
+            type: 'number',
+            label: data.getColumnLabel(0),
+            calc: function () { return 0; }
+        }
+        ]);
+        var chart = new google.visualization.LineChart($('#divLineChart')[0]); //returns a HTML DOM Object.  document.getElementById('chart_div')
+        var options = {
+            title: 'MouseClicks Report',
+            legend: 'bottom',
+            colors: ['blue', '#009900'],
+            hAxis: {
+                title: 'date',
+                format: '#'
+            },
+            vAxis: {
+                minValue: 0,
+                maxValue: themax,
+                title: 'mouseclick'
+            },
+            chartArea: {
+                left: 100, top: 50, width: '70%', height: '50%'
+            },
+            animation: {
+                duration: 1000
+            },
+        };
+        var runFirstTime = google.visualization.events.addListener(chart, 'ready', function () {
+            google.visualization.events.removeListener(runFirstTime);
+            chart.draw(data, options);
+        });
+        chart.draw(view, options);
+    }
+    google.load('visualization', '1', { packages: ['corechart'] });
+
+
+         //chart keypresses:
+
+
+    function drawLineChart2(d) {
+
+        var themax = @(ViewBag.MaxKeyPresses);
+
+                var chartData2 = d;
+                var data2 = null;
+                data2 = google.visualization.arrayToDataTable(chartData2);
+                var view2 = new google.visualization.DataView(data2);
+                view2.setColumns([0, {
+                type: 'number',
+            label: data2.getColumnLabel(0),
+            calc: function () { return 0; }
+                }
+        ]);
+                var chart2 = new google.visualization.LineChart($('#divLineChart2')[0]); //returns a HTML DOM Object.  document.getElementById('chart_div')
+                var options2 = {
+            title: 'KeyPresses Report',
+            legend: 'bottom',
+            colors: ['blue', '#009900'],
+            hAxis: {
+                title: 'date',
+                format: '#'
+            },
+            vAxis: {
+                minValue: 0,
+                maxValue: themax,
+                title: 'keypresses'
+            },
+            chartArea: {
+                left: 100, top: 50, width: '70%', height: '50%'
+            },
+            animation: {
+                duration: 1000
+            },
+        };
+            var runFirstTime2 = google.visualization.events.addListener(chart2, 'ready', function () {
+
+                google.visualization.events.removeListener(runFirstTime2);
+            chart2.draw(data2, options2);
+        });
+        chart2.draw(view2, options2);
+    }
+    google.load('visualization', '1', { packages: ['corechart'] });
+
+
+    // Chart Work Report :
+
+
+      function drawLineChart3(d) {
+
+        var themax = @(ViewBag.MaxInWork);
+
+                var chartData3 = d;
+                var data3 = null;
+                data3 = google.visualization.arrayToDataTable(chartData3);
+                var view3 = new google.visualization.DataView(data3);
+                view3.setColumns([0, {
+                type: 'number',
+            label: data3.getColumnLabel(0),
+            calc: function () { return 0; }
+                }
+        ]);
+                var chart3 = new google.visualization.LineChart($('#divLineChart3')[0]); //returns a HTML DOM Object.  document.getElementById('chart_div')
+                var options3 = {
+            title: 'Working Report',
+            legend: 'bottom',
+            colors: ['blue', '#009900'],
+            hAxis: {
+                title: 'date',
+                format: '#'
+            },
+            vAxis: {
+                minValue: 0,
+                maxValue: themax,
+                title: 'Minutes'
+            },
+            chartArea: {
+                left: 100, top: 50, width: '70%', height: '50%'
+            },
+            animation: {
+                duration: 1000
+            },
+        };
+            var runFirstTime3 = google.visualization.events.addListener(chart3, 'ready', function () {
+
+                google.visualization.events.removeListener(runFirstTime3);
+            chart3.draw(data3, options3);
+        });
+        chart3.draw(view3, options3);
+    }
+    google.load('visualization', '1', { packages: ['corechart'] });
+
+
+
+</script>
+
+

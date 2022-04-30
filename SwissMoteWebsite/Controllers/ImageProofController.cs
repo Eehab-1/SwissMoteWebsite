@@ -16,6 +16,7 @@ namespace SwissMoteWebsite.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        MyFunctions myfunctions = new MyFunctions();
 
         public ActionResult Progress(int? page)
         {
@@ -80,22 +81,22 @@ namespace SwissMoteWebsite.Controllers
         }
 
 
-        public ActionResult Show(int? page , string empid , int prounid)
+        public ActionResult Show(int? page , string empid , int proid)
         {
 
 
-            var actionid = Url.RequestContext.RouteData.Values["id"];
+         //   var actionid = Url.RequestContext.RouteData.Values["id"];
 
             //int id = Convert.ToInt32(actionid);
 
-            string emp_userid = actionid.ToString();
+            string emp_userid = empid;
 
             //var inviteduserid = db.ProjectInvitations.Where(u => u.Id == id)
             //    .Select(d => d.Invited_UserId).FirstOrDefault();
 
             // var inviteduserid = emp_userid;
 
-            var inviteduserid = empid;
+           var inviteduserid = empid;
 
 
             string creatoruserid = db.Teams.Where(a => a.TeamMemberUserId ==  emp_userid)
@@ -112,7 +113,7 @@ namespace SwissMoteWebsite.Controllers
 
 
 
-                string projectuniqueid = db.Projects.Where(p => p.Id == prounid)
+                string projectuniqueid = db.Projects.Where(p => p.Id == proid)
                     .Select(p => p.UniqueId).FirstOrDefault();
                     
 
@@ -122,8 +123,8 @@ namespace SwissMoteWebsite.Controllers
 
                 // Get Project Name and User Email and send them to view :
 
-                var UserEmail = db.Projects.Where(d => d.Invited_UserId == inviteduserid)
-                    .Select(u => u.Invited_Email_UserName).FirstOrDefault();
+                var UserEmail = db.Teams.Where(d => d.TeamMemberUserId == inviteduserid)
+                    .Select(u => u.TeamMember).FirstOrDefault();
 
                 ViewBag.EmailUserName = UserEmail;
 
@@ -200,129 +201,378 @@ namespace SwissMoteWebsite.Controllers
 
 
 
-       // public ActionResult Show(int? page)
-       // {
 
 
-       //     var actionid = Url.RequestContext.RouteData.Values["id"];
 
-       //     //int id = Convert.ToInt32(actionid);
+        public ActionResult ProgressChart(string empid, int proid)
+        {
 
-       //     string emp_userid = actionid.ToString();
+            //var actionid = Url.RequestContext.RouteData.Values["id"];
 
-       //     //var inviteduserid = db.ProjectInvitations.Where(u => u.Id == id)
-       //     //    .Select(d => d.Invited_UserId).FirstOrDefault();
+            //int id = Convert.ToInt32(actionid);
 
-       //     var inviteduserid = emp_userid;
+            int id = proid;
 
+            string creatoruserid = db.Projects.Where(a => a.Id == id)
+            .Select(u => u.CreatedByUserId).FirstOrDefault();
 
 
-       //     string creatoruserid = db.Teams.Where(a => a.TeamMemberUserId == emp_userid)
-       //         .Select(u => u.TeamCreatedByUserId).FirstOrDefault();
 
-       //     string currentuserid = User.Identity.GetUserId();
+            string currentuserid = User.Identity.GetUserId();
 
-       //     if (currentuserid == creatoruserid)
-       //     {
+            if (creatoruserid == currentuserid)
+            {
 
 
-       //         //var projectuniqueid = db.Projects.Where(u => u.Id == id)
-       //         //    .Select(p => p.UniqueId).FirstOrDefault();
+                ViewBag.Id = id;
 
-       //         var projectuniqueid = TempData["projectuniqueid"];
 
-       //         var listOfSpecificImagesProofs = db.ImageProofs.ToList()
-       //             .Where(j => j.ProjectUniqueId == projectuniqueid)
-       //             .Where(s => s.UploadByUserId == inviteduserid);
 
-       //         // Get Project Name and User Email and send them to view :
+                //var inviteduserid = db.ProjectInvitations.Where(u => u.Id == id)
+                //    .Select(d => d.Invited_UserId).FirstOrDefault();
 
-       //         var UserEmail = db.Projects.Where(d => d.Invited_UserId == inviteduserid)
-       //             .Select(u => u.Invited_Email_UserName).FirstOrDefault();
+                var inviteduserid = empid;
 
-       //         ViewBag.EmailUserName = UserEmail;
 
-       //         var ProjectName = db.Projects.Where(d => d.UniqueId == projectuniqueid)
-       //            .Select(u => u.ProjectName).FirstOrDefault();
+                var projectuniqueid = db.Projects.Where(u => u.Id == id)
+                    .Select(p => p.UniqueId).FirstOrDefault();
 
-       //         ViewBag.ProjectName = ProjectName;
+                #region Get Invitationinboxes id for TimerJsonEmployerSide + related data
 
+                //int InvitationInboxesId = db.InvitationInboxes.Where(i => i.ProjectInvitationUniqueId == projectuniqueid)
+                //    .Where(i => i.SentToUserId == inviteduserid).Select(i => i.Id).FirstOrDefault();
 
-       //         var TodayDate = listOfSpecificImagesProofs.Select(s => s.UploadedDateWithoutTime).LastOrDefault();
+                //ViewBag.InvitationInboxesId = InvitationInboxesId;
 
+                var ThisProjectThisUserList = db.ImageProofs
+              .Where(i => i.ProjectUniqueId == projectuniqueid)
+              .Where(i => i.UploadByUserId == inviteduserid);
 
-       //         var AllSessionsTodayList = listOfSpecificImagesProofs
-       //             .Where(d => d.UploadedDateWithoutTime == TodayDate);
 
-       //         var RecordsWithMaxMouseClicksToday = AllSessionsTodayList
-       // .GroupBy(x => x.DesktopUniqueSession,
-       //          (k, g) => g.Aggregate((a, x) => (x.MouseClicks > a.MouseClicks) ? x : a));
 
-       //         var TodayMouseClicks = RecordsWithMaxMouseClicksToday.Select(m => m.MouseClicks).Sum();
-       //         ViewBag.TodayMouseClicks = TodayMouseClicks;
+                var lista = ThisProjectThisUserList.ToList()
+      .GroupBy(x => x.DesktopUniqueSession,
+               (k, g) => g.Aggregate((a, x) => (x.DesktopTimer != a.DesktopTimer) ? x : a));
 
+                var listb = lista.Select(a => new
+                {
+                    thedate = a.UploadedDateWithoutTime,
+                    desktoptimer = myfunctions.ToSeconds(a.DesktopTimer)
 
-       //         var RecordsWithMaxKeyboardHitsToday = AllSessionsTodayList
-       //.GroupBy(x => x.DesktopUniqueSession,
-       //         (k, g) => g.Aggregate((a, x) => (x.KeyBoardHits > a.KeyBoardHits) ? x : a));
+                });
 
-       //         var TodayKeyboardHits = RecordsWithMaxKeyboardHitsToday.Select(k => k.KeyBoardHits).Sum();
 
-       //         ViewBag.TodayKeyPresses = TodayKeyboardHits;
 
+                var Dataxwork = listb.GroupBy(r => r.thedate)
+    .Select(
+    g => new
+    {
+        date = g.Key,
+        desktoptimerx = myfunctions.ToMinutes(g.Sum(s => s.desktoptimer)),
+    });
 
+                var desktoptimerx_count = Dataxwork.Select(a => a.desktoptimerx).Count();
+                if (desktoptimerx_count == 0)
+                {
+                    return View();
+                }
 
-       //         var RecordsWithMaxMouseClicksTotal = listOfSpecificImagesProofs
-       //.GroupBy(x => x.DesktopUniqueSession,
-       //         (k, g) => g.Aggregate((a, x) => (x.MouseClicks > a.MouseClicks) ? x : a));
+                var maxinwork = Dataxwork.Select(x => x.desktoptimerx).Max();
 
-       //         var TotalMouseClicks = RecordsWithMaxMouseClicksTotal.Select(m => m.MouseClicks).Sum();
+                ViewBag.MaxInWork = maxinwork;
 
-       //         ViewBag.TotalMouseClicks = TotalMouseClicks;
 
+                #endregion
 
 
 
-       //         var RecordsWithMaxKeyboardHitsTotal = listOfSpecificImagesProofs
-       //         .GroupBy(x => x.DesktopUniqueSession,
-       //       (k, g) => g.Aggregate((a, x) => (x.KeyBoardHits > a.KeyBoardHits) ? x : a));
 
-       //         var TotalKeyboardHits = RecordsWithMaxKeyboardHitsTotal.Select(k => k.KeyBoardHits).Sum();
+                var projectname = db.Projects.Where(p => p.UniqueId == projectuniqueid)
+                    .Select(p => p.ProjectName).FirstOrDefault();
 
+                ViewBag.ProjectName = projectname;
 
+                var useremailfreelancer = db.Users.Where(u => u.Id == inviteduserid).Select(u => u.Email).FirstOrDefault();
 
+                ViewBag.UserEmail = useremailfreelancer;
 
-       //         ViewBag.TotalKeyPresses = TotalKeyboardHits;
+                var listOfSpecificImagesProofs = db.ImageProofs.ToList()
+                    .Where(j => j.ProjectUniqueId == projectuniqueid)
+                    .Where(s => s.UploadByUserId == inviteduserid);
 
+                var RecordsWithMaxMouseClicksTotal = listOfSpecificImagesProofs
+      .GroupBy(x => x.DesktopUniqueSession,
+               (k, g) => g.Aggregate((a, x) => (x.MouseClicks > a.MouseClicks) ? x : a));
 
+                var Data = RecordsWithMaxMouseClicksTotal.Select(s => new
+                {
+                    TheDate = s.UploadedDateWithoutTime,
+                    TheValue = s.MouseClicks
 
+                });
 
-       //         var latestlist = listOfSpecificImagesProofs.OrderByDescending(u => u.UploadedDate);
 
+                var Datax = Data.GroupBy(r => r.TheDate)
+    .Select(
+        g => new
+        {
+            date = g.Key,
+            mouseclicks = g.Sum(s => s.TheValue),
+        });
 
-       //         return View(latestlist.ToList()
-       //                 .ToPagedList(page ?? 1, 4));
-       //     }
+                if (Datax.Count() > 0)
+                {
 
-       //     else
-       //     {
 
+                    var min_mouseclicks = Datax.Select(d => d.mouseclicks).Min();
+                    var max_mouseclicks = Datax.Select(d => d.mouseclicks).Max();
 
-       //         return Content("Non Authorized Access");
+                    ViewBag.MinMouseClicks = min_mouseclicks;
+                    ViewBag.MaxMouseClicks = max_mouseclicks;
 
-       //     }
-       // }
 
+                    var Dataxkeys = Data.GroupBy(r => r.TheDate)
+        .Select(
+        g => new
+        {
+            date = g.Key,
+            keypresses = g.Sum(s => s.TheValue),
+        });
 
 
+                    var max_keypresses = Dataxkeys.Select(d => d.keypresses).Max();
 
 
+                    ViewBag.MaxKeyPresses = max_keypresses;
 
+                    return View();
+                }
 
+                else
+                {
+                    return Content("No Reports Yet !");
+                }
+            }
 
 
 
 
+            else
+            {
+                return Content("Non Authorized Access !");
+            }
+        }
+
+
+
+        public JsonResult MouseClicksData(string empid, int proid)
+        {
+            //var actionid = Url.RequestContext.RouteData.Values["id"];
+
+            //int id = Convert.ToInt32(actionid);
+
+            var inviteduserid = empid;
+
+            var projectuniqueid = db.Projects.Where(u => u.Id == proid)
+                .Select(p => p.UniqueId).FirstOrDefault();
+
+            var listOfSpecificImagesProofs = db.ImageProofs.ToList()
+                .Where(j => j.ProjectUniqueId == projectuniqueid)
+                .Where(s => s.UploadByUserId == inviteduserid);
+
+            var RecordsWithMaxMouseClicksTotal = listOfSpecificImagesProofs
+  .GroupBy(x => x.DesktopUniqueSession,
+           (k, g) => g.Aggregate((a, x) => (x.MouseClicks > a.MouseClicks) ? x : a));
+
+            var Data = RecordsWithMaxMouseClicksTotal.Select(s => new
+            {
+                TheDate = s.UploadedDateWithoutTime,
+                TheValue = s.MouseClicks
+
+            });
+
+
+            var Datax = Data.GroupBy(r => r.TheDate)
+.Select(
+    g => new
+    {
+        date = g.Key,
+        mouseclicks = g.Sum(s => s.TheValue),
+    });
+
+
+            var dataobject = Datax;
+            var chartData = new object[dataobject.Count() + 1];
+            chartData[0] = new object[]{
+       "date",
+       "mouseclick"
+     };
+            int w = 0;
+            foreach (var i in dataobject)
+            {
+                w++;
+                chartData[w] = new object[] { i.date, i.mouseclicks };
+            }
+
+
+            return Json(chartData, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult TimerJsonEmployerSide(string empid, int proid)
+        {
+
+            var employerid = User.Identity.GetUserId();
+
+
+            //var actionid = Url.RequestContext.RouteData.Values["id"];
+
+            //int id = Convert.ToInt32(actionid); //id from InvitationInboxes Table.
+
+
+            //string projectsharedid = db.InvitationInboxes.Where(i => i.Id == id)
+            //    .Select(i => i.ProjectInvitationUniqueId).FirstOrDefault();
+
+            string projectsharedid = db.Projects.Where(i => i.Id == proid)
+               .Select(i => i.UniqueId).FirstOrDefault();
+
+            //string FreeLancerUserId = db.InvitationInboxes.Where(i => i.Id == id)
+            //    .Select(i => i.SentToUserId).FirstOrDefault();
+
+            string FreeLancerUserId = empid;
+
+            var ThisProjectThisUserList = db.ImageProofs
+                .Where(i => i.ProjectUniqueId == projectsharedid)
+                .Where(i => i.UploadByUserId == FreeLancerUserId);
+
+
+
+            var lista = ThisProjectThisUserList.ToList()
+  .GroupBy(x => x.DesktopUniqueSession,
+           (k, g) => g.Aggregate((a, x) => (x.DesktopTimer != a.DesktopTimer) ? x : a));
+
+            var listb = lista.Select(a => new
+            {
+                thedate = a.UploadedDateWithoutTime,
+                desktoptimer = myfunctions.ToSeconds(a.DesktopTimer)
+
+            });
+
+
+
+            var Datax = listb.GroupBy(r => r.thedate)
+.Select(
+g => new
+{
+    date = g.Key,
+    desktoptimerx = myfunctions.ToMinutes(g.Sum(s => s.desktoptimer)),
+});
+
+
+
+
+            //            var Datax = Datab.GroupBy(r => r.desktoptimerx)
+            //.Select(
+            //g => new
+            //{
+            //    date = g.Key,
+            //    desktoptimerx = ToHours(g.Sum(s => s.desktoptimerx)),
+            //});
+
+
+
+
+
+            var dataobject = Datax;
+            var chartData = new object[dataobject.Count() + 1];
+            chartData[0] = new object[]{
+       "date",
+       "Timing"
+     };
+            int w = 0;
+            foreach (var i in dataobject)
+            {
+                w++;
+                chartData[w] = new object[] { i.date, i.desktoptimerx };
+            }
+
+
+            return Json(chartData, JsonRequestBehavior.AllowGet);
+
+
+
+
+
+
+
+        }
+
+
+        public JsonResult KeyPressesData(string empid, int proid)
+        {
+
+            var actionid = Url.RequestContext.RouteData.Values["id"];
+
+            int id = Convert.ToInt32(actionid);
+
+            var inviteduserid = empid;
+
+            var projectuniqueid = db.Projects.Where(u => u.Id == proid)
+                .Select(p => p.UniqueId).FirstOrDefault();
+
+
+            var projectname = db.Projects.Where(p => p.UniqueId == projectuniqueid)
+                .Select(p => p.ProjectName).FirstOrDefault();
+
+            ViewBag.ProjectName = projectname;
+
+            var useremailfreelancer = db.Users.Where(u => u.Id == inviteduserid).Select(u => u.Email).FirstOrDefault();
+
+            ViewBag.UserEmail = useremailfreelancer;
+
+            var listOfSpecificImagesProofs = db.ImageProofs.ToList()
+                .Where(j => j.ProjectUniqueId == projectuniqueid)
+                .Where(s => s.UploadByUserId == inviteduserid);
+
+            var RecordsWithMaxKeyPressesTotal = listOfSpecificImagesProofs
+  .GroupBy(x => x.DesktopUniqueSession,
+           (k, g) => g.Aggregate((a, x) => (x.KeyBoardHits > a.KeyBoardHits) ? x : a));
+
+            var Data = RecordsWithMaxKeyPressesTotal.Select(s => new
+            {
+                TheDate = s.UploadedDateWithoutTime,
+                TheValue = s.KeyBoardHits
+
+            });
+
+
+            var Datax = Data.GroupBy(r => r.TheDate)
+.Select(
+    g => new
+    {
+        date = g.Key,
+        keypresses = g.Sum(s => s.TheValue),
+    });
+
+
+            var dataobject = Datax;
+            var chartData = new object[dataobject.Count() + 1];
+            chartData[0] = new object[]{
+       "date",
+       "keypresses"
+     };
+            int w = 0;
+            foreach (var i in dataobject)
+            {
+                w++;
+                chartData[w] = new object[] { i.date, i.keypresses };
+            }
+
+
+            return Json(chartData, JsonRequestBehavior.AllowGet);
+
+
+        }
 
 
 

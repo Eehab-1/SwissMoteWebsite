@@ -382,6 +382,7 @@
     <Content Include="Views\temptest\Edit.cshtml" />
     <Content Include="Views\temptest\Index.cshtml" />
     <Content Include="Views\ImageProof\Show.cshtml" />
+    <Content Include="Views\ImageProof\ProgressChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
