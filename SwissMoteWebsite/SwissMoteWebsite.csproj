@@ -231,6 +231,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\delete_48px.png" />
     <Content Include="Images\edit_96px.png" />
+    <Content Include="Images\inspect.png" />
     <Content Include="Images\invite.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -383,6 +384,7 @@
     <Content Include="Views\temptest\Index.cshtml" />
     <Content Include="Views\ImageProof\Show.cshtml" />
     <Content Include="Views\ImageProof\ProgressChart.cshtml" />
+    <Content Include="Views\Project\Insights.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

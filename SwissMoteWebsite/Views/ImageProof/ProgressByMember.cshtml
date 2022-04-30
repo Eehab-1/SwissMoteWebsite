@@ -6,77 +6,83 @@
 @model IEnumerable<SwissMoteWebsite.Models.Team>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Team Progress";
+
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
 }
 
-<h2>Index</h2>
+
 
 @{
-   var actionid = Url.RequestContext.RouteData.Values["id"];
+    var actionid = Url.RequestContext.RouteData.Values["id"];
 
-int projectid = Convert.ToInt32(actionid);
+    int projectid = Convert.ToInt32(actionid);
 }
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.TeamUniqueId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TeamCreatedByUserId)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.TeamName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TeamMember)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.TeamMemberUserId)
-        </th>
-        <th>
+        </th>*@
+        @*<th>
             @Html.DisplayNameFor(model => model.TeamInsights)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MemberInsights)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.MemberHourlyRate)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.TeamStatus)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MemberStatus)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.ClientName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.MemberChatKey)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+        if (!string.IsNullOrWhiteSpace(item.TeamMember))
+        {
+
+
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.TeamUniqueId)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.TeamCreatedByUserId)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.TeamName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TeamMember)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.TeamMemberUserId)
             </td>
             <td>
@@ -84,22 +90,22 @@ int projectid = Convert.ToInt32(actionid);
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MemberInsights)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.MemberHourlyRate)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.TeamStatus)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MemberStatus)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.ClientName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.MemberChatKey)
-            </td>
+            </td>*@
             <td>
                 @*@Html.ActionLink("Show", "Show", new { id = item.TeamMemberUserId })*@
 
@@ -114,17 +120,19 @@ int projectid = Convert.ToInt32(actionid);
                 @*@Html.ActionLink("Show", "Show" + ViewBag.empid + item.TeamMemberUserId + "&prounid=" + @projectid)*@
 
                 @Html.ActionLink(
-     "some text",
-     "show",
-     "ImageProof",
-     new { empid = item.TeamMemberUserId , proid = projectid },
-     null
- )
+                      "View Progress",
+                      "show",
+                      "ImageProof",
+                      new { empid = item.TeamMemberUserId, proid = projectid },
+                      null
+                  )
 
                 @*@Html.ActionLink("Details", "Details", new { id = item.TeamId }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.TeamId })*@
             </td>
         </tr>
-    }
+
+                        }
+                    }
 
 </table>

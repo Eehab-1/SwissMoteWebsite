@@ -29,6 +29,18 @@ namespace SwissMoteWebsite.Controllers
         }
 
 
+        public ActionResult Insights()
+        {
+
+            string userid = User.Identity.GetUserId();
+
+
+            var projects = db.Projects.Include(p => p.Team);
+            return View(projects.Where(a => a.CreatedByUserId == userid).ToList());
+        }
+
+
+
         public ActionResult D1()
         {
 

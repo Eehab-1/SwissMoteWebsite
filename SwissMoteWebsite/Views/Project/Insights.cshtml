@@ -1,5 +1,8 @@
 ﻿
 
+
+
+
 @model IEnumerable<SwissMoteWebsite.Models.Project>
 
 
@@ -69,7 +72,7 @@
                                 </a>
                             </li>*@
                         <li>
-                            <a href="/project" id="active">
+                            <a href="/project" >
                                 <img src="~/updatev2/images/icon-2.svg" alt="">
                                 Projects
                             </a>
@@ -87,7 +90,7 @@
                                 </a>
                             </li>*@
                         <li>
-                            <a href="/Project/Insights">
+                            <a  href="#" id="active">
                                 <img src="~/updatev2/images/icon-5.svg" alt="">
                                 Insights
                             </a>
@@ -126,8 +129,8 @@
                                 </button>
                             </div>
                             <div class="header-cnt">
-                                <h4>Projects</h4>
-                                <a href="/project/create"><img src="~/updatev2/images/plus.svg" alt=""> New Project</a>
+                                @*<h4>Projects</h4>
+                                <a href="/project/create"><img src="~/updatev2/images/plus.svg" alt=""> New Project</a>*@
                             </div>
                         </div>
                     </div>
@@ -137,7 +140,7 @@
                             <table class="project-table">
                                 <tr>
                                     <th>PROJECT</th>
-                                    <th>INSIGHTS</th>
+                                    @*<th>INSIGHTS</th>*@
                                     <th>TEAM</th>
                                     <th>CLIENT</th>
                                     <th>STATUS</th>
@@ -172,9 +175,9 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ProjectName)
                                         </td>
-                                        <td>
+                                        @*<td>
                                             @Html.DisplayFor(modelItem => item.Team.TeamInsights)
-                                        </td>
+                                        </td>*@
 
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Team.TeamName)
@@ -190,15 +193,15 @@
 
                                         <td>
 
-                                            <a href="/project/edit/@item.Id">
-                                                <img src="@Url.Content("~/Images/edit_96px.png")" alt="Edit" data-toggle="tooltip" title="Edit" width="20px" height="20px" />
+                                            <a href="/ImageProof/ProgressByMember/@item.Id">
+                                                <img src="@Url.Content("~/Images/inspect.png")" alt="Inspect" data-toggle="tooltip" title="Inspect" width="20px" height="20px" />
                                             </a>
 
-                                           
 
-                                            <a href="/project/delete/@item.Id">
+
+                                            @*<a href="/project/delete/@item.Id">
                                                 <img src="@Url.Content("~/Images/delete_48px.png")" alt="Delete" data-toggle="tooltip" title="Delete" width="20px" height="20px" />
-                                            </a>
+                                            </a>*@
 
                                             @*&nbsp;*@
 
@@ -239,7 +242,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" id="active">
+                        <a href="#" >
                             <img src="~/updatev2/images/icon-2.svg" alt="">
                             Projects
                         </a>
@@ -257,7 +260,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#" id="active">
                             <img src="~/updatev2/images/icon-5.svg" alt="">
                             Insights
                         </a>

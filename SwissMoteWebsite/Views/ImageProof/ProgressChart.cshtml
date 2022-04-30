@@ -1,19 +1,11 @@
-﻿@*@{
-
-        var actionid = Url.RequestContext.RouteData.Values["id"];
-
-        int id = Convert.ToInt32(actionid);
-
-        ViewBag.Id = id;
+﻿
 
 
-        //Get minValue and maxValue
+@{
+    ViewBag.Title = "member progress";
 
-
-
-
-
-    }*@
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+}
 
 @{
 
@@ -21,20 +13,20 @@
 
     var theprojid = Request.QueryString["proid"];
 
-   
+
 
 }
 
 
-<input type="hidden" id="empid"  value=@theempid />
+<input type="hidden" id="empid" value=@theempid />
 
 <input type="hidden" id="proid" value=@theprojid />
 
 
-<br />
+<!--<br />-->
 
-<h2>Progress Chart</h2>
-<br />
+@*<h2>Progress Chart</h2>*@
+<!--<br />-->
 
 <h5><b>Project Name:</b> @ViewBag.ProjectName</h5>
 <h5> <b>Freelancer:</b>   @ViewBag.UserEmail</h5>
@@ -156,7 +148,7 @@
 
           @*var theid3 = @(ViewBag.InvitationInboxesId);*@
 
-       
+
 
 
         var chartData3 = null;

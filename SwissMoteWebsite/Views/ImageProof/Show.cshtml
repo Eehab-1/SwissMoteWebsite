@@ -7,6 +7,13 @@
 
 @model IPagedList<SwissMoteWebsite.Models.ImageProof>
 
+@{
+    ViewBag.Title = "member progress";
+
+    Layout = "~/Views/Shared/FigmaMaster.cshtml";
+}
+
+
 
 @{ //var actionid = Url.RequestContext.RouteData.Values["id"];
 
@@ -24,8 +31,8 @@
 
 
 
-    // ViewBag.Id = id; 
-    }
+    // ViewBag.Id = id;
+}
 
 <style>
     .intro {
@@ -63,7 +70,7 @@
 "View Chart",
 "ProgressChart",
 "ImageProof",
-new { empid = theempid , proid = theprojid },
+new { empid = theempid, proid = theprojid },
 null
 )
 
@@ -124,15 +131,16 @@ null
 
         @foreach (var item in Model)
         {
-<div class="col-md-3">
+            <div class="col-md-3">
 
 
-    @*@Html.DisplayFor(modelItem => item.ImageFileName)*@
-    <img src="@Url.Content("~/UploadedFiles/" + item.ImageFileName)" width="250" height="250" alt=item.ImageFileName />
+                @*@Html.DisplayFor(modelItem => item.ImageFileName)*@
+                <img src="@Url.Content("~/UploadedFiles/" + item.ImageFileName)" width="250" height="250" alt=item.ImageFileName />
 
 
 
-</div>}
+            </div>
+}
 
     </table>
 
@@ -140,5 +148,5 @@ null
 </div>
 
 
-@Html.PagedListPager(Model, page => Url.Action("Show", new { page , empid = @theempid, proid = @theprojid, searchBy = Request.QueryString["search"] })
+@Html.PagedListPager(Model, page => Url.Action("Show", new { page, empid = @theempid, proid = @theprojid, searchBy = Request.QueryString["search"] })
 , new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
